@@ -1,0 +1,36 @@
+.subpages-navigation {
+  background-color: #fff;
+  @include center-block;
+  margin-top: 2em;
+  margin-bottom: 1em;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  li {
+    margin-right: clamp(.5em, 2vw, 2em);
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      color: $color__text-light;
+      border-bottom: 3px solid transparent;
+      padding: .3em .5em;
+      @include transition;
+
+      &:hover {
+        color: $color__text-main;
+        border-bottom: 3px solid $color__interactive;
+      }
+    }
+  }
+
+  .current-menu-item a {
+    color: $color__text-main;
+    border-bottom: 3px solid $color__interactive;
+  }
+}

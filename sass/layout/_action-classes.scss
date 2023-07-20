@@ -1,0 +1,32 @@
+.overflow__hidden {
+  overflow: hidden;
+}
+
+body:not(.front-page) {
+  
+  &.placeholder__preloading {
+		// overflow: hidden;
+
+		main {
+			height: 100vh;
+		}
+		
+		article,
+		.page-header,
+		.page-header-index,
+		.pagination-wrapper,
+		.not-found,
+		#filter-init {
+			opacity: 0;
+			@include transition(.5s);
+		}
+	}
+
+	&.opened-sidebar {
+		overflow: hidden;
+	}
+
+	&.opened-filter {
+		overflow: hidden;
+	}
+}

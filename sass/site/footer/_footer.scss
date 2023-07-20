@@ -1,0 +1,43 @@
+.site-footer {
+	padding: 2em 1em;
+	color: #fff;
+	background-color: $color__skin;
+	text-align: center;
+
+	a {
+		font-weight: 700;
+		color: white;
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+.footer__hidden {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: $footer__height;
+	background: $color__skin url(../images/stars_bg.svg) top center;
+	z-index: -1;
+}
+
+.site-info {
+	display: flex;
+	height: 100%;
+}
+
+.site-rights {
+	align-self: flex-end;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	span + * {
+		margin-left: .5em;
+	}
+}

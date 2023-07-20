@@ -1,0 +1,117 @@
+.main-navigation {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  // border-bottom: 1px solid hsla(0,0%,54%,.3);
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+  width: 100%;
+  z-index: 11;
+  @include transition(.3s, transform, ease-out);
+  
+  // @include theme-width;
+
+  .inner-wrapper {
+    display: flex;
+    align-items: center;
+    @include theme-wrapper;
+  }
+  
+  .admin-bar & {
+    @media screen and (min-width: 600px) {
+      top: 46px;
+    }
+
+    @media screen and (min-width: 782px) {
+      top: 32px;
+    }
+  }
+
+  #menu-filter {
+    margin-left: auto;
+  }
+
+	ul {
+    display: flex;
+    // flex: 1 0 auto;
+    margin: 0 10px;
+    // for scrollbar
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+	li {
+    flex-grow: 1;
+    margin-right: 10px;
+    border-bottom: 3px solid transparent;
+    @include transition;
+
+    &:hover {
+      border-bottom: 3px solid $color__interactive;
+
+      a {
+        color: black;
+      }
+    }
+
+    // only on archives pages
+    &.current-menu-item{
+      border-bottom: 3px solid $color__interactive;
+
+      a {
+        color: black;
+      }
+    }
+
+    &.current_page_parent {
+      // only on post
+      .single &,
+      // only on archives for posts (blog)
+      .archive-view:not(.blog) & {
+        border-bottom: 3px solid $color__interactive;
+
+        a {
+          color: black;
+        }
+      }
+    }
+    
+    a {
+      @include font-size(1);
+      color: $color__text-main;
+      display: flex;
+      align-items: center;
+      padding: .7em .2em;
+
+      @media screen and (min-width: $bp__xxs) {
+        padding: .7em .5em;
+      }
+
+      @media screen and (min-width: $bp__sm) {
+        padding: .7em 1.2em;
+      }
+    }
+  }
+
+	.current_page_item > a,
+	.current-menu-item > a,
+	.current_page_ancestor > a,
+	.current-menu-ancestor > a {
+  }
+  
+  // for svg icon
+  .menu-ui {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+
+  &.hide-menu {
+    transform: translateY(-100%);
+  }
+}

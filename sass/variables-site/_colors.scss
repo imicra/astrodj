@@ -1,0 +1,34 @@
+$color__skin: hsl(0, 0%, 10%); // Header etc.
+$color__accent: #ba3925;
+$color__skin-bg: #2a2a2a; // Backgrounds on featured pages, blocks
+$color__interactive: #0091dc; // Links, highlights, etc.
+$color__gray-light: #eee;
+$color__gray-middle: #ccc;
+$color__error: #dc3545;
+$color__success: #2ecc71;
+
+$color__background-body: #fff;
+$color__background-light: $color__gray-light;
+$color__background-middle: $color__gray-middle;
+$color__background-dark: $color__skin-bg;
+$color__background-screen: #f1f1f1;
+$color__background-hr: #ccc;
+$color__background-button: $color__interactive;
+$color__background-pre: #eee;
+$color__background-ins: #fff9c0;
+
+$color__text-main: #222;
+$color__text-light: #555d66;
+$color__headings-main: $color__accent;
+$color__text-screen: #21759b;
+$color__text-input: $color__text-light;
+$color__text-input-focus: $color__text-main;
+$color__link: #2455c3;
+$color__link-visited: $color__link;
+$color__link-hover: $color__link;
+
+$color__border-button: $color__interactive;
+$color__border-button-hover: $color__interactive;
+$color__border-button-focus: $color__interactive;
+$color__border-input: #ccc;
+$color__border-abbr: #666;

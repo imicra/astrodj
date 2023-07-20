@@ -1,0 +1,69 @@
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea {
+	color: $color__text-input;
+	border: 1px solid $color__border-input;
+	border-radius: 3px;
+	width: 100%;
+
+	&:focus {
+		color: $color__text-input-focus;
+		outline: 0;
+	}
+}
+
+input[type="search"] {
+	border-radius: 0;
+	padding: 1em;
+
+	& + svg {
+		position: absolute;
+		visibility: hidden;
+		top: 50%;
+		right: 1.5em;
+		transform: translateY(-50%);
+	}
+
+	&:placeholder-shown + svg {
+		visibility: visible;
+	}
+}
+
+select {
+	border: 1px solid $color__border-input;
+}
+
+textarea {
+	width: 100%;
+	min-height: 130px;
+	resize: vertical;
+}
+
+/* clears the 'X' from Internet Explorer */
+input[type=search]::-ms-clear,
+input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0; 
+}
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none; 
+}

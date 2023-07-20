@@ -1,0 +1,35 @@
+.metabox {
+	padding: .7em 0;
+  position: relative;
+  margin-top: .5em;
+  display: inline-block;
+  
+  &.borders {
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      height: 1px;
+      background-color: gray;
+    }
+  }
+
+	&__item {
+		margin-bottom: .5em;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.meta-inline {
+
+  .icon {
+    margin-right: .5em;
+  }
+
+  span {
+    @include font-size(.9);
+  }
+}

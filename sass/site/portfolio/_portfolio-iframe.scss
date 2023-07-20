@@ -1,0 +1,237 @@
+// .post-portfolio,
+// .stock-portfolio {
+//   //reset fancybox css
+//   .fancybox-content,
+//   .fancybox-slide--iframe .fancybox-content {
+//     background-color: hsl(0, 0%, 20%);
+//   }
+
+//   .fancybox-slide--iframe {
+//     padding: 44px 0;
+//   }
+
+//   .fancybox-bg {
+//     background: #000;
+//   }
+
+//   .fancybox-is-open .fancybox-bg {
+//     opacity: .8;
+//   }
+// }
+
+.archive-stock {
+  .fancybox-bg {
+    background: darken(hsl(0, 0%, 20%), 15%);
+  }
+}
+
+.astrodj-iframe-portfolio {
+  height: auto;
+  background-color: hsl(0, 0%, 20%);
+
+	.site-content {
+		background-color: hsl(0, 0%, 20%);
+    color: white;
+	}
+}
+
+.astrodj-iframe-portfolio .iframe-post-portfolio,
+.astrodj-iframe-portfolio .iframe-post-stock {
+  padding: .5em;
+  display: flex;
+  flex-direction: column;
+
+  .entry-header {
+    font-size: .8em;
+
+    @media screen and (max-width: $bp__md) {
+      padding: .5em 0 1em;
+    }
+
+    .entry-title {
+      font-family: $font__sans;
+      @include font-size(1.6);
+      font-weight: $font__semi-bold;
+      text-transform: uppercase;
+      line-height: 1;
+
+      @media screen and (min-width: $bp__md) {
+        margin-bottom: 1em;
+      }
+    }
+  }
+
+  .post-thumbnail__wrapper {
+    order: -1;
+
+    @media screen and (max-width: $bp__sm) {
+      margin-top: 3em;
+    }
+  }
+
+  .post-thumbnail__menu {
+    position: relative;
+    text-align: right;
+
+    .icon {
+      fill: #fff;
+    }
+  }
+
+  .entry-content {
+    display: flex;
+    flex-direction: column;
+
+    p:not(.first-paragraph) {
+      @include font-size(.89);
+      font-weight: $font__normal;
+      max-width: initial;
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+      margin-top: 0;
+    }
+
+    .metabox {
+      font-size: .9em;
+      font-family: $font__sans;
+      text-align: center;
+      margin-top: auto;
+    
+      &.borders {
+        &:before,
+        &:after {
+          left: 50%;
+          transform: translateX(-50%);
+          width: 8em;
+        }
+      }
+
+      a {
+        color: white;
+        border-bottom: 2px solid;
+        padding: 0 .5em .3em;
+      }
+    }
+  }
+
+  .media-exif__wrapper {
+    padding-top: .5em;
+  }
+
+  .entry-meta {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 1.5em;
+    justify-content: center;
+
+    .tags-single {
+      font-size: .9em;
+      border: 1px solid rgba($color: #fff, $alpha: .3);
+      border-radius: 6px;
+      background-color: rgba($color: #fff, $alpha: .1);
+      padding: .3em .6em;
+      margin-right: .3em;
+      margin-top: .3em;
+      @include transition;
+
+      &:hover {
+        background-color: rgba($color: #fff, $alpha: .2);
+      }
+    }
+  }
+
+  .entry-footer {
+    font-size: .7em;
+    font-weight: $font__light;
+    border-top: 1px solid rgba($color: #fff, $alpha: .1);
+    padding: .8em .5em 0;
+    margin-top: 2em;
+  }
+
+  @media screen and (min-width: $bp__md) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: .5em 1em;
+    padding: 5em .5em 4em;
+
+    &.vertical {
+      // for not appear scroll-bar in vertical image
+      grid-gap: .5em 1em;
+    }
+
+    .entry-header {
+      grid-area: title;
+    }
+
+    .post-thumbnail__wrapper {
+      grid-area: figure;
+      text-align: center;
+      // padding-bottom: .5em;
+
+      img {
+        max-height: 500px;
+        width: auto;
+      }
+    }
+  
+    .entry-content {
+      grid-area: content;
+    }
+
+    .media-exif__wrapper {
+      grid-area: exif;
+    }
+
+    .entry-meta {
+      grid-area: meta;
+      align-items: start;
+      // reset mobile styles
+      border-top: none;
+      padding: 0;
+      margin-top: auto;
+    }
+
+    .entry-footer {
+      grid-area: footer;
+      margin: 0;
+    } 
+  }
+}
+
+.astrodj-iframe-portfolio .iframe-post-portfolio {
+
+  @media screen and (min-width: $bp__md) {
+    grid-template-areas: "figure title"
+                         "figure content"
+                         "figure meta"
+                         "exif exif"
+                         "footer footer";
+    grid-template-rows: auto 1fr auto auto auto;
+  }
+}
+
+.astrodj-iframe-portfolio .iframe-post-stock {
+
+  @media screen and (min-width: $bp__md) {
+    grid-template-areas: "figure content"
+                         "footer footer";
+    grid-template-rows: repeat(2, auto);
+
+    .content-wrapper {
+      grid-area: content;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .entry-content {
+      grid-area: content;
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+
+      .media-exif__wrapper {
+        // margin-top: auto;
+      }
+    }
+  }
+}

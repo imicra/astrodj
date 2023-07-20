@@ -1,0 +1,68 @@
+.site {
+  // background-color: $color__background-body;
+  position: relative;
+  min-height: 100%;
+  // keeping the footer at the bottom
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: transform 0.6s cubic-bezier(0.42, 0, 0.05, 0.99);
+
+  body.opened-sidebar & {
+    transform: translateX(30%);
+  }
+}
+
+//use .theme-wrapper or .theme-fluid for any layouts
+.theme-wrapper {
+  @include theme-wrapper;
+  //fix full-bleed images
+  overflow: hidden;
+}
+
+.theme-fluid {
+  padding-left: 1em;
+  padding-right: 1em;
+  //fix full-bleed images
+  overflow: hidden;
+
+	@media screen and (min-width: $bp__md) {
+    padding-left: 10%;
+		padding-right: 10%;
+	}
+}
+
+.site-content {
+  // @include theme-width;
+  background-color: $color__background-body;
+  // keeping the footer at the bottom
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  &.margin__hidden {
+    margin-bottom: $footer__height; //for fixed footer
+  }
+
+  .archive-view &,
+  .archive-stock & {
+    background-color: $color__background-light;
+  }
+}
+
+// keeping the footer at the bottom
+.content-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.iframe {
+  position: relative;
+}
+
+/*--------------------------------------------------------------
+## Action Classes
+--------------------------------------------------------------*/
+@import "action-classes";

@@ -1,0 +1,379 @@
+.wp-block-image {
+	//display: flex; //for alignleft and alignright
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+
+	//additional class for reset flex. Used in Guttenberg.
+	// &.flow {
+	// 	display: block;
+	// }
+
+	.aligncenter {
+		display: block;
+		max-width: $size__max-width--small;
+		margin: 0 auto;
+
+		&.is-resized {
+			// margin: 0;
+			// margin-left: auto;
+			// margin-right: auto;
+		}
+
+		.astrodj-lqip {
+			margin: 0 auto;
+		}
+
+		&>figcaption {
+			display: block;
+		}
+	}
+
+	&.vertical {
+    // max-width: 540px;
+		// margin: 0 auto;
+		margin-left: 1rem;
+		margin-right: 1rem;
+		
+		@media screen and (min-width: $bp__sm) {
+			margin-left: 20%;
+			margin-right: 20%;
+		}
+	}
+	
+	.alignleft {
+		margin-left: -1em;
+		margin-right: auto;
+
+		@media screen and (min-width: $bp__md) {
+			margin-left: 0;
+		}
+
+		figcaption {
+			text-align: left;
+			margin-left: 1em;
+
+			&:after {
+				left: 0;
+				transform: translateX(0);
+			}
+
+			@media screen and (min-width: $bp__md) {
+				margin-left: 0;
+			}
+		}
+	}
+	
+	.alignright {
+		margin-right: -1em;
+		margin-left: auto;
+
+		@media screen and (min-width: $bp__md) {
+			margin-right: 0;
+		}
+
+		figcaption {
+			text-align: right;
+			margin-right: 1em;
+
+			&:after {
+				right: 0;
+				left: auto;
+				transform: translateX(0);
+			}
+
+			@media screen and (min-width: $bp__md) {
+				margin-right: 0;
+			}
+		}
+
+		.media-exif__wrapper .media-exif__button {
+			left: 0;
+			right: auto;
+		}
+	}
+	
+	&.alignfull {
+		.astrodj-lqip {
+			display: block; //reset flex
+			max-width: 100vw;
+			margin-left: -1em;
+			margin-right: -1em;
+			
+			@media screen and (min-width: $bp__md) {
+				// margin: 0 -10%;
+				// margin-left: calc(-100vw / 2 + 100% / 2);
+				// margin-right: calc(-100vw / 2 + 100% / 2);
+				width: 100vw;
+				max-width: 2000px !important;
+				margin-left: 50%;
+				transform: translateX(-50%);
+			}
+		}
+	}
+	
+	&.alignwide {
+		display: block; //reset flex
+		max-width: 100vw;
+		margin-left: -1em;
+		margin-right: -1em;
+	
+		@media screen and (min-width: $bp__md) {
+			// margin: 0 -10%;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	.fancybox {
+		border: none;
+		display: block;
+		outline: none;
+	}
+
+	//fix exif button in full width image
+	&.alignfull .image-exif__wrapper .image-exif__button {
+		@media screen and (min-width: $bp__md) {
+			right: 1em;
+		}
+	}
+}
+
+figcaption {
+	.wp-block-image &,
+	.wp-block-embed & {
+		@include font-size(.9);
+		line-height: 1;
+		text-align: center;
+		position: relative;
+		padding-bottom: 1em;
+		margin-left: 3em;
+		margin-right: 3em;
+		
+		@media screen and (min-width: $bp__md) {
+			line-height: $font__line-height-body;
+		}
+	
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 8em;
+			height: 1px;
+			background-color: gray;
+		}
+	}
+}
+
+.post-thumbnail__wrapper {
+	position: relative;
+}
+
+.wp-block-gallery {
+	padding-bottom: 1em;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	position: relative;
+	display: flex;
+
+	// &:after {
+	// 	content: '';
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   width: 8em;
+  //   height: 1px;
+  //   background-color: gray;
+	// }
+
+	flex-direction: column;
+
+	@media screen and (min-width: $bp__md) {
+		flex-direction: row;
+	}
+	
+	// rewrite core styles
+	&.has-nested-images {
+
+		figure.wp-block-image:not(#individual-image) {
+
+			@media screen and (max-width: $bp__md) {
+				width: 100%;
+			}		
+		}
+	}
+
+	.blocks-gallery-grid {
+		width: 100%;
+		flex-direction: column;
+
+		@media screen and (min-width: $bp__md) {
+			flex-direction: row;
+		}
+
+		.blocks-gallery-item {
+			width: 100%;
+
+			@media screen and (min-width: $bp__md) {
+				width: calc(50% - 16px);
+			}
+		}
+	}
+
+	.blocks-gallery-caption {
+		position: relative;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		font-size: 1.035rem;
+		padding-bottom: 1em;
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 8em;
+			height: 1px;
+			background-color: gray;
+		}
+	}
+
+	figure {
+		width: 100%;
+	}
+
+	.astrodj-lqip {
+		width: 100%;
+	}
+
+	.blocks-gallery-image,
+	.blocks-gallery-item {
+		figcaption {
+			@include font-size(.9);
+			color: $color__text-light;
+			padding: 0 .5em;
+			margin: -.5em 0;
+			transform: translateY(100%);
+			background: none;
+		}
+	}
+
+	&.alignwide {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	&.aligncenter {
+		max-width: $size__max-width--small;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&.alignfull {
+		margin-left: -1em;
+    margin-right: -1em;
+
+		@media screen and (min-width: $bp__md) {
+			width: 100vw;
+			max-width: 2000px;
+			margin-left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+
+	&.vertical {
+		@media screen and (max-width: $bp__sm) {
+			margin-left: 1rem;
+			margin-right: 1rem;
+		}
+		
+		@media screen and (min-width: $bp__sm) and (max-width: $bp__md) {
+			margin-left: 20%;
+			margin-right: 20%;
+		}
+	}
+}
+
+/* Exif */
+.image-exif__wrapper {
+	position: relative;
+
+	.image-exif__overlay {
+		opacity: 0;
+		visibility: hidden;
+		// display: none;
+		background: rgba(0,0,0,.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+	}
+	
+	.image-exif__container {
+		font-size: .9em;
+		opacity: 0;
+		visibility: hidden;
+		// display: none;
+		color: white;
+		text-align: center;
+		position: absolute;
+		width: 100%;
+		/* height: 100%; */
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+
+		@media screen and (min-width: $bp__xs) {
+			font-size: 1em;
+		}
+	}
+
+	.image-exif__button {
+		position: absolute;
+		right: 0;
+		top: 0;
+		line-height: 1;
+		padding: .8em .5em;
+		cursor: pointer;
+		@include transition;
+		z-index: 1;
+
+		span {
+			@include font-size(.6);
+			color: #fff;
+			background-color: $color__skin-bg;
+			border-radius: 6px;
+			text-transform: uppercase;
+			line-height: 1;
+			padding: .2em .5em;
+		}
+
+		@media screen and (min-width: $bp__md) {
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+
+	&:hover {
+		.image-exif__button {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&.show {
+		.image-exif__overlay,
+		.image-exif__container,
+		.image-exif__button {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}

@@ -1,0 +1,83 @@
+:root {
+	--color-interactive: #{$color__interactive};
+}
+
+html {
+	box-sizing: border-box;
+	height: 100%;
+}
+
+*,
+*:before,
+*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+	box-sizing: inherit;
+}
+
+::selection {
+	background: #ddd;
+	color: #000;
+	text-shadow: none;
+}
+
+body {
+	background: $color__background-body; /* Fallback for when there is no custom background color defined. */
+	height: 100%;
+
+	&.archive-portfolio {
+		background: $color__skin-bg;
+	}
+}
+
+blockquote, q {
+	quotes: "" "";
+}
+
+hr {
+	background-color: $color__background-hr;
+	border: none;
+	height: 1px;
+	margin-bottom: 2.5em;
+
+	&.styled-separator {
+		background: linear-gradient(to left,$color__background-hr calc(50% - 16px),transparent calc(50% - 16px),transparent calc(50% + 16px),$color__background-hr calc(50% + 16px));
+    background-color: rgba(0, 0, 0, 0);
+		background-color: transparent !important;
+		width: 100%;
+		position: relative;
+
+		&:before,
+		&:after {
+			background: $color__background-hr;
+			content: '';
+			display: block;
+			height: 1.6rem;
+			position: absolute;
+			top: calc(50% - 0.8rem);
+			transform: rotate(22.5deg);
+			width: .1rem;
+		}
+
+		&:before {
+			left: calc(50% - 0.5rem);
+		}
+
+		&:after {
+			right: calc(50% - 0.5rem);
+		}
+	}
+}
+
+@import "lists";
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+	vertical-align: top; /* Fix space after img OR use: display: block;*/
+}
+
+figure {
+	margin: 0; /* Extra wide images within figure tags don't overflow the content area. */
+}
+
+@import "tables";
+@import "blocks";

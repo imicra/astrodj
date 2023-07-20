@@ -1,0 +1,128 @@
+@import "buttons";
+
+@import "fields";
+
+.search-form {
+  position: relative;
+}
+
+.form__wrapper {
+  &.centered {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 1.5em;
+  }
+
+  &.mobile {
+
+    @media screen and (min-width: $bp__xs) {
+      width: 340px;
+    }
+
+    @media screen and (min-width: $bp__sm) {
+      width: 100%;
+    }
+  }
+}
+
+.form__container {
+  text-align: left;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 1.8em 2em;
+  z-index: 2;
+}
+
+.form-group {
+  margin-bottom: .5em;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: $font__semi-bold;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  @include transition;
+
+  &::placeholder {
+    font-weight: $font__normal;
+  }
+
+  &.error {
+    border-color: $color__error;
+  }
+
+  &.success {
+    border-color: $color__success;
+  }
+
+  &:focus {
+
+    &::placeholder {
+      color: $color__gray-middle;
+    }
+  }
+}
+
+small {
+  @include font-size(.7);
+}
+
+.text-danger {
+  color: $color__error;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  @include transition;
+}
+
+.form-text:not(.form-help) {
+  opacity: 0;
+  visibility: hidden;
+
+  &.error {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.form-help {
+  font-size: .8em;
+  line-height: 1;
+  color: $color__error;
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.success {
+    font-size: 1em;
+    font-weight: $font__semi-bold;
+    color: $color__success;
+  }
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  @include transition;
+}

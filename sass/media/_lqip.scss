@@ -1,0 +1,75 @@
+/*LQIP: Low Quality Image Placeholders*/
+.astrodj-lqip {
+  position: relative;
+
+  &__wrap {
+    @include absolute;
+    overflow: hidden;
+
+    &.bg {
+      background-color: darken($color__background-light, 10%);
+    }
+  }
+
+  img {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .placeholder {
+    opacity: 0;
+    filter: blur(50px);
+    @include transition(.1s, opacity);
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  .lazy {
+    opacity: 0;
+    @include transition(.5s, opacity);
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+}
+
+.fullpage-post-portfolio,
+.stock-post-portfolio {
+  .post-thumbnail__wrapper {
+    .astrodj-lqip {
+      &__wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+  
+        &.bg {
+          background-color: transparent;
+        }
+      }
+  
+      .placeholder {
+        opacity: 1;
+        filter: none;
+      }
+  
+      .lazy {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.astrodj-full-portfolio {
+ #loader_wrapper {
+  .astrodj-lqip {
+		&__wrap {
+			&.bg {
+				background-color: lighten($color__skin-bg, 10%);
+			}
+		}
+	}
+ } 
+}

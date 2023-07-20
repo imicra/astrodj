@@ -1,0 +1,118 @@
+.archive-portfolio {
+	.site-content {
+		background-color: transparent;
+		color: $color__gray-light;
+	}
+
+	.widget-filter__page {
+		&--inner {
+			color: #999;
+
+			svg {
+				fill: #fff;
+			}
+
+			.block {
+				color: lighten($color__text-light, 45%);
+			}
+		}
+	}
+
+	.astrodj-portfolio .astrodj-lqip {
+		&__wrap {
+			&.bg {
+				background-color: lighten($color__skin-bg, 10%);
+			}
+		}
+	}
+}
+
+.portfolio-content {
+	margin: 2em 0 0;
+
+	& + & {
+		margin: 0;
+	}
+	
+	@media screen and (min-width: $bp__sm) {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+		grid-auto-rows: 1fr;
+		grid-gap: 0;
+		grid-auto-flow: dense;
+	}
+  
+  .astrodj-portfolio {
+		margin: .1em;
+
+		@media screen and (min-width: $bp__sm) {
+			// margin: 0;
+			align-self: stretch;
+
+			&.vertical {
+				grid-row: span 2;
+			}
+	
+			&.panorama {
+				grid-column: span 2;
+			}
+	
+			&.featured {
+				grid-row: span 2;
+				grid-column: span 2;
+			}
+
+			figure {
+				display: flex;
+				height: 100%;
+	
+				img {
+					flex: 1;
+					object-fit: cover;
+				}
+			}
+		}
+
+		figure {
+			position: relative;
+
+			.entry-title {
+				font-family: $font__sans;
+				font-size: .9em;
+				font-weight: $font__normal;
+				color: white;
+				line-height: 1.2;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				padding: 4em .5em .5em;
+				margin: 0;
+				text-shadow: 0 0 2px #000;
+				opacity: 0;
+				@include transition;
+			}
+	
+			&:hover .entry-title {
+				background-image: linear-gradient(transparent 15%, rgba(0, 0, 0, .3));
+				opacity: 1;
+				backdrop-filter: blur(1px);
+			}
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+## Portfolio iframe
+--------------------------------------------------------------*/
+@import "portfolio-iframe";
+
+/*--------------------------------------------------------------
+## Portfolio fullpage
+--------------------------------------------------------------*/
+@import "portfolio-fullpage";
+
+/*--------------------------------------------------------------
+## Stock fullpage
+--------------------------------------------------------------*/
+@import "stock-fullpage";

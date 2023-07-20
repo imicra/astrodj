@@ -1,0 +1,425 @@
+// body class
+.astrodj-full-portfolio {
+	.site-main {
+    position: relative;
+    // for keep footer at bottom
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  .portfolio,
+  .stock {
+    display: flex;
+		flex-direction: column;
+    flex-grow: 1;
+    padding: 0;
+  }
+}
+
+.back-link {
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    background: #000;
+    padding: .5em;
+    border-radius: 20px;
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    @include transition;
+
+    span {
+      display: none;
+      font-size: .8em;
+      position: absolute;
+      top: 50%;
+      left: 2.5em;
+      transform: translateY(-50%);
+    }
+
+    &:hover {
+      width: 6em;
+      padding-left: .6em;
+
+      span {
+        display: block;
+      }
+    }
+  }
+}
+
+.fullpage-post-portfolio {
+
+  .post-thumbnail__wrapper {
+    position: relative;
+    background-color: rgb(34, 34, 34);
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+
+  .post-thumbnail__inner {
+    max-width: $size__max-width;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 2em;
+    padding-bottom: 2em;
+    position: relative;
+    z-index: 10;
+
+    @media screen and (max-width: $bp__sm) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &.vertical {
+    .post-thumbnail__inner {
+      // js style max-width = width attribute of image;
+      // css not work with lqip functionality
+      // max-width: 2000px;
+    }
+  }
+
+  .post-thumbnail {
+    height: 70vh;
+    max-height: 70vmin;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    a {
+      &:focus,
+			&:active {
+				outline: none;
+			}
+    }
+
+    img {
+      // max-height: 100%;
+      // max-height: 70vh;
+      max-height: 70vmin;
+      width: auto;
+      height: auto;
+
+      // for LQIP image
+      &.placeholder {
+        object-fit: contain;
+        object-position: center center;
+        height: 100%;
+      }
+    }
+  }
+
+  .post-content__wrapper {
+    color: $color__text-main;
+    background-color: $color__background-light;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-content__inner {
+    @include theme-wrapper($size__max-width--big);
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    .content-inner {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 2em;
+      margin-top: 2em;
+      border-bottom: 1px solid rgba(0, 0, 0 ,.1);
+
+      @media screen and (min-width: $bp__md) {
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 4em;
+      }
+    }
+  }
+
+  .entry-content {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: $bp__md) {
+      flex: 0 1 50%;
+      padding-right: 2em;
+    }
+
+    p:not(.first-paragraph) {
+      font-size: .9em;
+      max-width: initial;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    // for Cat. №
+    .cat {
+      margin-top: auto;
+    }
+
+    code {
+      background-color: lighten($color__gray-middle, 7%);
+      padding: 0 .2em;
+    }
+
+    .wp-block-image .aligncenter {
+      margin: 0 20%;
+    }
+
+    .wp-block-image figcaption {
+      @include font-size(.8);
+      padding-bottom: 0;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  .entry-title {
+    font-family: $font__sans;
+    font-size: 1.6em;
+    font-weight: $font__semi-bold;
+    margin-bottom: 1em;
+  }
+
+  .meta-content {
+
+    span {
+      // font-weight: $font__semi-bold;
+    }
+
+    @media screen and (min-width: $bp__md) {
+      flex: 1 0 30%;
+    }
+  }
+
+  .media-exif__wrapper {
+    padding-top: 1em;
+  }
+
+  .media-exif__content {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  .entry-meta {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    h5 {
+      font-size: 1rem;
+      font-weight: $font__normal;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .tags-single {
+      font-size: .9em;
+      border: 1px solid darken($color__background-middle, 5%);
+      border-radius: 6px;
+      background-color: $color__background-middle;
+      padding: .3em .6em;
+      margin-right: .3em;
+      margin-top: .3em;
+      @include transition;
+
+      &:hover {
+        background-color: darken($color__background-middle, 10%);
+      }
+    }
+  }
+}
+
+/* Common Styles */
+.fullpage-post-portfolio,
+.stock-post-portfolio {
+  .post-thumbnail__menu {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-size: .7em;
+      font-weight: $font__normal;
+      color: #999;
+    }
+
+    .icon {
+      fill: #fff;
+    }
+  }
+}
+
+.meta-list__container {
+  border-top: 1px solid rgba(0, 0, 0, .1);
+  width: 100%;
+  padding-bottom: 1em;
+  margin-top: 2em;
+
+  h5 {
+    font-size: 1em;
+    font-weight: $font__normal;
+    margin-top: 1em;
+  }
+
+  p {
+    font-family: $font__sans;
+    font-size: .9em;
+    margin: 0;
+  }
+
+  .meta-list__inner {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .meta-list--item {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+
+    @media screen and (min-width: $bp__sm) {
+      flex: 1 1 50%;
+    }
+
+    .item-mage {
+      border: 1px solid #afb7bc;
+      border-radius: 50%;
+      padding: .1em;
+      margin-right: 1em;
+      flex: 0 0 50px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #afb7bc;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .item-text {
+      font-size: .8em;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-name {
+      font-weight: $font__semi-bold;
+    }
+  }
+
+  &.col {
+    .meta-list__inner {
+      flex-direction: row;
+    }
+
+    .meta-list--item {
+      padding: .5em;
+    }
+  }
+
+  &.line {
+    .meta-list--item {
+      justify-content: space-between;
+      flex: 1 0 100%;
+
+      span {
+        font-size: .9em;
+        // line-height: 1;
+      }
+    }
+  }
+}
+
+.stock-post-portfolio .meta-list__container {
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+
+// Infinite Scroll
+.astrodj-full-portfolio {
+  #loader_wrapper {
+    @include theme-wrapper;
+  }
+
+  .loader_inner {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    margin-top: 2em;
+
+    @media screen and (min-width: $bp__sm) {
+      margin-top: 4em;
+    }
+  }
+
+  #loader_container {
+    position: relative;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      display: none;
+      fill: $color__gray-middle;;
+			width: 30px;
+			height: 30px;
+			animation: spinner .6s linear infinite;
+		}
+
+    .astrodj-post-navigation__end {
+      p {
+        font-family: $font__sans;
+        color: $color__gray-middle;
+        font-weight: $font__semi-bold;
+        margin: 0;
+      }
+    }
+  }
+
+  // reset ".single .hentry"
+  .hentry {
+    padding: 0;
+  }
+}
+
+.astrodj-full-portfolio {
+  .box-inline {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 1em;
+    margin-bottom: 1em;
+
+    @media screen and (min-width: $bp__sm) {
+      flex-direction: row;
+    }
+  }
+
+  .metabox {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+
+    span {
+      @include font-size(.9);
+    }
+  }
+}

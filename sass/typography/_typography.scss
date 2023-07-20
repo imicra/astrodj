@@ -1,0 +1,15 @@
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+	color: $color__text-main;
+	font-family: $font__sans;
+	font-size: calc(15px + .25vw);
+	line-height: $font__line-height-body;
+}
+
+@import "headings";
+
+@import "copy";

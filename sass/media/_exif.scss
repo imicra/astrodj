@@ -1,0 +1,182 @@
+.media-exif__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.media-exif__content {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+
+  .block & {
+    width: 250px;
+  }
+
+  .inline &,
+  .inline-block & {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .inline-block & {
+    width: 355px;
+  }
+
+  .inline & {
+    width: 200px;
+
+    @media screen and (min-width: $bp__md) {
+      width: 100%;
+      padding-left: .5em;
+      padding-right: .5em;
+    }
+  }
+
+  &--item {
+    margin-bottom: .5em;
+    width: 50%;
+
+    .inline & {
+      @media screen and (min-width: $bp__md) {
+        width: auto;
+        display: flex;
+        align-items: center;
+
+        &:not(:first-child) {
+          padding-left: 1em;
+        }
+      }
+    }
+  }
+
+  .inline-block & {
+    &--inner_1 {
+      .media-exif__content--item {
+          width: auto;
+          display: flex;
+          align-items: center;
+  
+          &:not(:first-child) {
+            padding-left: 1em;
+          }
+
+          .icon {
+            height: 3.6em;
+            width: 3.6em;
+          }
+      }
+    }
+  }
+
+  &--inner {
+    margin-left: 1em;
+  }
+
+  .inline &,
+  .inline-block & {
+    &--inner_1,
+    &--inner_2 {
+      display: flex;
+      width: 100%;
+    }
+
+    &--inner_1 {
+      order: 1;
+
+      .icon {
+        height: 2.6em;
+        width: 2.6em;
+      }
+    }
+
+    &--inner_2 {
+      order: 2;
+      flex-wrap: wrap;
+    }
+  }
+
+  .inline & {
+    &--inner_1,
+    &--inner_2 {
+      @media screen and (min-width: $bp__md) {
+        width: auto;
+      }
+    }
+
+    &--inner_1 {
+      @media screen and (max-width: $bp__md) {
+        span {
+          display: block;
+          margin: .5em 0 0;
+        }
+      }
+    }
+
+    &--inner_2 {
+      @media screen and (min-width: $bp__md) {
+        order: 3;
+      }
+    }
+  }
+
+  .icon {
+    height: 1.2em;
+    width: 1.2em;
+  }
+
+  span {
+    font-size: .9em;
+    font-weight: $font__light;
+    line-height: 1.4;
+    margin-left: .5em;
+  }
+
+  .inline & {
+    span {
+      // font-size: .8em;
+    }
+  }
+
+  &--item-camera {
+    display: flex;
+    align-items: center;
+
+    .block & {
+      width: 100%;
+    }
+
+    .icon {
+      height: 5em;
+      width: 5em;
+    }
+
+    span {
+      display: block;
+    }
+  }
+
+  &--item-date {
+    width: 100%;
+
+    .inline & {
+      order: 3;
+
+      @media screen and (min-width: $bp__md) {
+        width: auto;
+        order: 2;
+      }
+    }
+
+    span {
+
+      .block & {
+        font-size: 1em;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
