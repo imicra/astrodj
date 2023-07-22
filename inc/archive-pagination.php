@@ -9,7 +9,7 @@
  * Enqueue JavaScript.
  */
 function astrodj_archive_ajax_scripts() {
-	if( ! is_singular() ) {
+	if ( ! is_singular() || is_page_template( 'templates/archive-photography.php' ) ) {
     wp_enqueue_script( 'astrodj-archive-ajax', get_template_directory_uri() . '/js/archive-ajax.inc.js', array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'astrodj-archive-ajax', 'archive_ajax',
 			array(
@@ -24,6 +24,13 @@ function astrodj_archive_ajax_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'astrodj_archive_ajax_scripts' );
+
+/**
+ * Archive pages that used this ajax functionality.
+ */
+function astrodj_load_more_archive() {
+  return is_post_type_archive() || is_page_template( 'templates/archive-photography.php' );
+}
 
 /**
  * Return maximum number of pages.
@@ -61,7 +68,7 @@ function astrodj_load_more_button() {
       <div class="load-more__loader">
         <?php if ( ! is_singular() && ! is_post_type_archive() ) : ?>
           <div class="loader-placeholder loader"><div></div><div></div><div></div></div>
-        <?php elseif ( is_post_type_archive() ) : ?>
+        <?php elseif ( astrodj_load_more_archive() ) : ?>
           <svg class="icon icon-loader-ring loader" viewBox="0 0 32 32">
           <path d="M16,5.2c5.9,0,10.8,4.8,10.8,10.8S21.9,26.8,16,26.8S5.2,21.9,5.2,16H0c0,8.8,7.2,16,16,16s16-7.2,16-16S24.8,0,16,0V5.2z"/>
           </svg>
@@ -255,6 +262,12 @@ function astrodj_archive_pagination_cb() {
         }
       }
     }
+
+    if ( in_array( "archive-photography", $archVal ) ) {
+			$type = "post_type";
+      $args[ $type ] = 'archive';
+      $args[ 'posts_per_page' ] = get_option( 'astrodj_portfolio_posts_per_page' );
+    }
     
     //check page trail and remove "page" value
     if ( in_array( "page", $archVal ) ) {
@@ -328,7 +341,7 @@ function astrodj_archive_pagination_cb() {
     endif;
 
     // if is CPT Archives
-    if ( $load_post->query_vars['post_type'] == 'portfolio' || $load_post->query_vars['post_type'] == 'stock' || $load_post->query_vars['post_type'] == 'cats' ) :
+    if ( in_array( $load_post->query_vars['post_type'], ['portfolio', 'stock', 'cats', 'archive'] ) ) :
 
       if ( $load_post->query_vars['paged'] == 1 ) :
 
@@ -371,13 +384,17 @@ function astrodj_archive_pagination_cb() {
     while( $load_post->have_posts() ) : 
       $load_post->the_post();
       
-      if ( $load_post->query_vars['post_type'] == 'portfolio' || $load_post->query_vars['post_type'] == 'stock' ):
+      if ( in_array( $load_post->query_vars['post_type'], ['portfolio', 'stock'] ) ) :
 
         get_template_part( 'template-parts/portfolio', 'fullpage' );
 
-      elseif ( $load_post->query_vars['post_type'] == 'cats' ):
+      elseif ( $load_post->query_vars['post_type'] == 'cats' ) :
 
         get_template_part( 'template-parts/portfolio', 'iframe' );
+
+      elseif ( $load_post->query_vars['post_type'] == 'archive' ) :
+
+        get_template_part( 'template-parts/content', 'archive' );
 
       else :
 

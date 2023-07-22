@@ -9,8 +9,8 @@
     // DOM and js variant
     var placeholder__content = $('#placeholder__content'),
         placeholder__gallery = $('#placeholder__gallery');
-    placeholder__content.addClass('action').remove();
-    placeholder__gallery.remove();
+        placeholder__content.addClass('action').remove();
+        placeholder__gallery.remove();
     $('body').removeClass('placeholder__preloading');
 
     // History back with Local Storage on Blog pages

@@ -71,7 +71,7 @@ function astrodj_register_portfolio_metabox() {
     $portfolio_meta = new_cmb2_box( array(
         'id'            => $prefix . 'portfolio_meta_metabox',
         'title'         => __( 'Формат Снимка', 'cmb2' ),
-        'object_types'  => array( 'portfolio', 'stock', 'cats' ), // Post type
+        'object_types'  => array( 'portfolio', 'stock', 'cats', 'archive' ), // Post type
         //'show_on'       => array( 'key' => 'id', 'value' => array( 2 ) ),
         'context'       => 'normal',
         'priority'      => 'high',

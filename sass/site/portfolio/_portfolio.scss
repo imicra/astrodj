@@ -90,6 +90,7 @@
 				margin: 0;
 				text-shadow: 0 0 2px #000;
 				opacity: 0;
+				pointer-events: none;
 				@include transition;
 			}
 	

@@ -301,6 +301,7 @@ figcaption {
 /* Exif */
 .image-exif__wrapper {
 	position: relative;
+	width: 100%;
 
 	.image-exif__overlay {
 		opacity: 0;
@@ -319,12 +320,14 @@ figcaption {
 		font-size: .9em;
 		opacity: 0;
 		visibility: hidden;
-		// display: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		color: white;
 		text-align: center;
 		position: absolute;
-		width: 100%;
-		/* height: 100%; */
+		width: 50%;
+		height: 100%;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
@@ -332,6 +335,23 @@ figcaption {
 
 		@media screen and (min-width: $bp__xs) {
 			font-size: 1em;
+		}
+
+		.archive-stock & {
+
+			@media screen and (min-width: $bp__sm) {
+				font-size: .65em;
+				width: 70%;
+			}
+
+			@media screen and (min-width: 992px) {
+				font-size: .7em;
+				width: 50%;
+			}
+
+			@media screen and (min-width: 1440px) {
+				width: 60%;
+			}
 		}
 	}
 

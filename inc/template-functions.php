@@ -26,12 +26,16 @@ function astrodj_body_classes( $classes ) {
 		$classes[] = 'archive-portfolio';
 	}
 
-	if ( 'stock' == get_post_type() || 'cats' == get_post_type() || is_page_template( 'templates/archive-photography.php' ) ) {
+	if ( in_array( get_post_type(), ['stock', 'cats', 'archive'] ) ) {
 		$classes[] = 'archive-stock';
 	}
 
 	if ( 'cats' == get_post_type() ) {
 		$classes[] = 'archive-iframe';
+	}
+
+	if ( 'archive' == get_post_type() ) {
+		$classes[] = 'archive-photography';
 	}
 
 	// Adds a class for content placeholder loading.

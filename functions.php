@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.2.3' );
+	define( '_S_VERSION', '1.2.4' );
 }
 
 if ( ! function_exists( 'astrodj_setup' ) ) :
@@ -347,6 +347,7 @@ function astrodj_scripts() {
 		array(
 			'site_url'    => site_url( '/' ),
 			'ajax_url'    => admin_url( 'admin-ajax.php' ),
+			'rest_media'  => rest_url( 'wp/v2/media/'),
 			'is_singular' => is_singular(),
 			'site_name'   => get_bloginfo( 'name', 'display' ),
 			'debug'       => WP_DEBUG,

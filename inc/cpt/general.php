@@ -53,13 +53,24 @@ function modify_cpt_query( $query ) {
 	}
 
 	if( $query->is_post_type_archive( 'archive' ) ) {
-		$query->set( 'posts_per_page', $portfolio_posts_per_page ); // can create custom option for cats posts_per_page
+		$query->set( 'posts_per_page', $portfolio_posts_per_page );
 	}
 }
 add_filter( 'pre_get_posts', 'modify_cpt_query' );
 
 /**
- * Default sorting by date.
+ * Redirect CPT single to a custom URL, archive page is publicly available.
+ */
+function astrodj_redirect_post() {
+  if ( is_singular( 'archive' ) ) :
+    wp_redirect( home_url(), 301 );
+    exit;
+  endif;
+}
+add_action( 'template_redirect', 'astrodj_redirect_post' );
+
+/**
+ * Default sorting by date in admin's post table.
  */
 function astrodj_cpt_sort_query( $clauses, $query ) {
 	global $wpdb;

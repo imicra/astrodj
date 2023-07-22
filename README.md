@@ -4,9 +4,13 @@
 - [github](https://github.com/automattic/_s)
 - [_s](https://underscores.me/)
 
+Фичи (Features)
+---------------
+Ajax load more, ajax pagination, ajax filter, lqip for images (low-quality image placeholders).
+Display EXIF data for images.
+
 Описание
 ---------------
-Техническое
 
 Компилляция идет с помощью отдельной 'темы' `gulp-dev`:
 - [См. репозиторий](https://github.com/imicra/gulp-dev)

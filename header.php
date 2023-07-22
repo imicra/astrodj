@@ -47,16 +47,6 @@
 					</h1>
 					<?php
 					endif;
-				elseif ( is_page_template( 'templates/archive-photography.php' ) ) :
-					$title = get_theme_mod( 'archive_title', esc_html__( 'Архив', 'astrodj' ) );
-					if ( ! empty( $title ) ) :
-					?>
-					<h1 class="site-title">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-						- <span><?php echo $title; ?></span>
-					</h1>
-					<?php
-					endif;
 				else :
 				?>
 					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
@@ -75,13 +65,6 @@
 				if ( is_post_type_archive() ) :
 				?>
 					<span class="site-description"><?php echo get_the_post_type_description(); ?></span>
-				<?php elseif ( is_page_template( 'templates/archive-photography.php' ) ) : ?>
-					<span class="site-description">
-						<?php
-						$description = get_theme_mod( 'archive_subtitle', esc_html__( 'Архивные фото', 'astrodj' ) );
-						echo wp_kses_post( $description );
-						?>
-					</span>
 				<?php elseif ( $astrodj_description || is_customize_preview() ) : ?>
 					<p class="site-description"><?php echo $astrodj_description; /* WPCS: xss ok. */ ?></p>
 				<?php endif; ?>
@@ -106,7 +89,7 @@
 						$total = wp_count_posts( 'cats', 'readable' )->publish;
 						echo '<span>' . $total . ' Фото</span>';
 
-					elseif ( is_page_template( 'templates/archive-photography.php' ) ) :
+					elseif ( is_post_type_archive( 'archive' ) ) :
 						$total = wp_count_posts( 'archive', 'readable' )->publish;
 						echo '<span>' . $total . ' Фото</span>';
 					endif;

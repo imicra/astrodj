@@ -41,9 +41,17 @@
 
 	li {
     flex-grow: 1;
-    margin-right: 10px;
+    margin-right: 5px;
     border-bottom: 3px solid transparent;
     @include transition;
+
+    @media screen and (min-width: $bp__xxs) {
+      margin-right: 8px;
+    }
+
+    @media screen and (min-width: $bp__xs) {
+      margin-right: 10px;
+    }
 
     &:hover {
       border-bottom: 3px solid $color__interactive;
@@ -82,7 +90,7 @@
       align-items: center;
       padding: .7em .2em;
 
-      @media screen and (min-width: $bp__xxs) {
+      @media screen and (min-width: $bp__xs) {
         padding: .7em .5em;
       }
 

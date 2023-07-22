@@ -53,6 +53,7 @@ function astrodj_post_thumbnail_lqip( $class = '', $size, $size_lq = 'astrodj_lq
   $srcset = wp_get_attachment_image_srcset( $thumbnail_id, $size );
   $sizes = wp_get_attachment_image_sizes( $thumbnail_id, $size );
   $alt = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
+  $exif = astrodj_mybe_exif( $thumbnail_id );
 
   /**
    * Filter the $ratio
@@ -68,7 +69,7 @@ function astrodj_post_thumbnail_lqip( $class = '', $size, $size_lq = 'astrodj_lq
     </div>
     <div class="astrodj-lqip__wrap">
       <?php do_action( 'astrodj_post_thumbnail_lqip_before_image', $full_attributes ); ?>
-      <img width="<?php echo $full_attributes[1]; ?>" height="<?php echo $full_attributes[2]; ?>" class="lazy">
+      <img width="<?php echo $full_attributes[1]; ?>" height="<?php echo $full_attributes[2]; ?>" class="lazy"<?php echo $exif; ?>>
       <?php do_action( 'astrodj_post_thumbnail_lqip_after_image' ); ?>
     </div>
     <?php do_action( 'astrodj_post_thumbnail_lqip_before_end' ); ?>
@@ -140,17 +141,29 @@ function astrodj_post_thumbnail_lqip_single_excerpt() {
  * Single Post Fancybox.
  */
 function astrodj_post_thumbnail_lqip_fancybox_start( $full_attributes ) {
-  if ( is_single() ) : ?>
-  <a href="<?php echo $full_attributes[0]; ?>" class="fancybox">
+  if ( is_single() || 'archive' === get_post_type() ) :
+  ?>
+    <a href="<?php echo $full_attributes[0]; ?>" class="fancybox">
   <?php
   endif;
 }
 add_action( 'astrodj_post_thumbnail_lqip_before_image', 'astrodj_post_thumbnail_lqip_fancybox_start' );
 
 function astrodj_post_thumbnail_lqip_fancybox_end() {
-  if ( is_single() ) : ?>
+  if ( is_single() || 'archive' === get_post_type() ) : ?>
   </a>
   <?php
   endif;
 }
 add_action( 'astrodj_post_thumbnail_lqip_after_image', 'astrodj_post_thumbnail_lqip_fancybox_end' );
+
+/**
+ * Display EXIF if it nesessary.
+ */
+function astrodj_mybe_exif( $thumbnail_id ) {
+  if ( 'archive' !== get_post_type() ) {
+    return;
+  }
+
+  return ' data-exif-id=' . $thumbnail_id;
+}

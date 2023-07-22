@@ -46,7 +46,8 @@ $post_types = array(
   'post',
   'portfolio',
   'stock',
-  'cats'
+  'cats',
+  'archive'
 );
 
 foreach ( $post_types as $post_type ) {

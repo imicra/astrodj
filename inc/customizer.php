@@ -373,7 +373,7 @@ function astrodj_return_is_page_cats() {
  * @return void
  */
 function astrodj_return_is_page_archive() {
-  return 'templates/archive-photography.php' === get_page_template_slug( get_the_ID() );
+  return is_post_type_archive( 'archive' );
 }
 
 /**
