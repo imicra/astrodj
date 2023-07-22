@@ -38,22 +38,19 @@ function modify_cpt_query( $query ) {
 		return;
 	}
 
-	$portfolio_posts_per_page = get_option( 'astrodj_portfolio_posts_per_page' );
+	$post_types = array(
+		'portfolio',
+		'stock',
+		'cats',
+		'archive'
+	);
 
-	if( $query->is_post_type_archive( 'stock' ) ) {
-		$query->set( 'posts_per_page', $portfolio_posts_per_page ); // can create custom option for stock posts_per_page
-	}
+	foreach ( $post_types as $post_type ) {
+		$posts_per_page = get_option( "astrodj_{$post_type}_posts_per_page" );
 
-	if( $query->is_post_type_archive( 'portfolio' ) ) {
-		$query->set( 'posts_per_page', $portfolio_posts_per_page ); // can create custom option for portfolio posts_per_page
-	}
-
-	if( $query->is_post_type_archive( 'cats' ) ) {
-		$query->set( 'posts_per_page', $portfolio_posts_per_page ); // can create custom option for cats posts_per_page
-	}
-
-	if( $query->is_post_type_archive( 'archive' ) ) {
-		$query->set( 'posts_per_page', $portfolio_posts_per_page );
+		if( $query->is_post_type_archive( $post_type ) ) {
+			$query->set( 'posts_per_page', $posts_per_page );
+		}
 	}
 }
 add_filter( 'pre_get_posts', 'modify_cpt_query' );

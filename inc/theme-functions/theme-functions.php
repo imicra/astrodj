@@ -231,9 +231,10 @@ function astrodj_post_archive_page( $type, $num = false ) {
  * $num for CPT would get from custom option posts_per_page.
  */
 function astrodj_get_archive_back_link() {
-	$portfolio_posts_per_page = get_option( 'astrodj_portfolio_posts_per_page' );
+	$post_type = get_post_type();
+	$portfolio_posts_per_page = get_option( "astrodj_{$post_type}_posts_per_page" );
 
-	$paged = astrodj_post_archive_page( get_post_type(), $portfolio_posts_per_page );
+	$paged = astrodj_post_archive_page( $post_type, $portfolio_posts_per_page );
 
 	if ( $paged == 1 ) {
 		$path = '';
@@ -242,7 +243,7 @@ function astrodj_get_archive_back_link() {
 	}
 	?>
 	<div class="back-link">
-		<a href="<?php echo get_post_type_archive_link( get_post_type() ) . $path; ?>">
+		<a href="<?php echo get_post_type_archive_link( $post_type ) . $path; ?>">
 			<?php echo astrodj_get_svg( array( 'icon' => 'arrow-left' ) ); ?>
 			<span>Назад</span>
 		</a>

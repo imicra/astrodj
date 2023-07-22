@@ -399,13 +399,17 @@
     /* ---------------------------------------------------------------------------
     *  Portfolio Pages Post Navigation History
     * --------------------------------------------------------------------------- */
-    $(document).on('click', 'body.astrodj-full-portfolio .astrodj-portfolio a, body.astrodj-full-portfolio .nav-links a', function() {
-      var that = $(this),
-          id = that.data('hash-id'),
-          post_hash = '#post-' + id;
+    $(document).on(
+      'click',
+      'body.astrodj-full-portfolio .astrodj-portfolio a, body.astrodj-full-portfolio .nav-links a, body.archive-portfolio .astrodj-portfolio a, body.archive-stock .astrodj-portfolio a',
+      function() {
+        var that = $(this),
+            id = that.data('hash-id'),
+            post_hash = '#post-' + id;
 
-      localStorage.setItem('portfolio-hash', post_hash);
-    });
+        localStorage.setItem('portfolio-hash', post_hash);
+      }
+    );
 
     /* ---------------------------------------------------------------------------
     * Dropdown Menu with plugin Popper.js.

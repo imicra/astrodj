@@ -23,11 +23,17 @@ add_action( 'admin_menu', 'astrodj_add_admin_page' );
 function astrodj_theme_general_settings() {
   register_setting( 'astrodj-settings-group', 'astrodj_rights' );
   register_setting( 'astrodj-settings-group', 'astrodj_portfolio_posts_per_page' );
+  register_setting( 'astrodj-settings-group', 'astrodj_stock_posts_per_page' );
+  register_setting( 'astrodj-settings-group', 'astrodj_cats_posts_per_page' );
+  register_setting( 'astrodj-settings-group', 'astrodj_archive_posts_per_page' );
 
   add_settings_section( 'astrodj-general-options', 'Главные настройки', 'astrodj_general_options_cb', 'astrodj_admin' );
 
   add_settings_field( 'rights-name', 'Имя автора снимков в Копирайте', 'astrodj_rights_name_cb', 'astrodj_admin', 'astrodj-general-options' );
   add_settings_field( 'portfolio-posts-per-page', 'На страницах галерей отображать не более', 'astrodj_portfolio_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
+  add_settings_field( 'stock-posts-per-page', 'На страницах сток отображать не более', 'astrodj_stock_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
+  add_settings_field( 'cats-posts-per-page', 'На страницах коты отображать не более', 'astrodj_cats_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
+  add_settings_field( 'archive-posts-per-page', 'На страницах архив отображать не более', 'astrodj_archive_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
 }
 
 // Settings Page
@@ -57,6 +63,21 @@ function astrodj_rights_name_cb() {
 function astrodj_portfolio_posts_per_page_cb() {
   $portfolio_posts_per_page = esc_attr( get_option( 'astrodj_portfolio_posts_per_page' ) );
   echo '<input class="small-text" id="astrodj_portfolio_posts_per_page" type="number" name="astrodj_portfolio_posts_per_page" step="1" min="1" value="' . $portfolio_posts_per_page . '" /> записи';
+}
+
+function astrodj_stock_posts_per_page_cb() {
+  $stock_posts_per_page = esc_attr( get_option( 'astrodj_stock_posts_per_page' ) );
+  echo '<input class="small-text" id="astrodj_stock_posts_per_page" type="number" name="astrodj_stock_posts_per_page" step="1" min="1" value="' . $stock_posts_per_page . '" /> записи';
+}
+
+function astrodj_cats_posts_per_page_cb() {
+  $cats_posts_per_page = esc_attr( get_option( 'astrodj_cats_posts_per_page' ) );
+  echo '<input class="small-text" id="astrodj_cats_posts_per_page" type="number" name="astrodj_cats_posts_per_page" step="1" min="1" value="' . $cats_posts_per_page . '" /> записи';
+}
+
+function astrodj_archive_posts_per_page_cb() {
+  $archive_posts_per_page = esc_attr( get_option( 'astrodj_archive_posts_per_page' ) );
+  echo '<input class="small-text" id="astrodj_archive_posts_per_page" type="number" name="astrodj_archive_posts_per_page" step="1" min="1" value="' . $archive_posts_per_page . '" /> записи';
 }
 
 function astrodj_api_key_cb() {

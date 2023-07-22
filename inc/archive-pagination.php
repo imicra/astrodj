@@ -208,7 +208,7 @@ function astrodj_archive_pagination_cb() {
     if ( in_array( "stock-photography", $archVal ) ) {
 			$type = "post_type";
       $args[ $type ] = 'stock';
-      $args[ 'posts_per_page' ] = get_option( 'astrodj_portfolio_posts_per_page' );
+      $args[ 'posts_per_page' ] = get_option( 'astrodj_stock_posts_per_page' );
 
       // for widget filter
       if ( ! empty( $filter_query ) ) {
@@ -237,7 +237,7 @@ function astrodj_archive_pagination_cb() {
     if ( in_array( "cats-photography", $archVal ) ) {
 			$type = "post_type";
       $args[ $type ] = 'cats';
-      $args[ 'posts_per_page' ] = get_option( 'astrodj_portfolio_posts_per_page' );
+      $args[ 'posts_per_page' ] = get_option( 'astrodj_cats_posts_per_page' );
 
       // for widget filter
       if ( ! empty( $filter_query ) ) {
@@ -266,7 +266,7 @@ function astrodj_archive_pagination_cb() {
     if ( in_array( "archive-photography", $archVal ) ) {
 			$type = "post_type";
       $args[ $type ] = 'archive';
-      $args[ 'posts_per_page' ] = get_option( 'astrodj_portfolio_posts_per_page' );
+      $args[ 'posts_per_page' ] = get_option( 'astrodj_archive_posts_per_page' );
     }
     
     //check page trail and remove "page" value

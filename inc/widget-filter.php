@@ -17,7 +17,7 @@ function astrodj_widget_filter_cb() {
   $order = ! empty( $_POST['order'] ) ? esc_attr( $_POST['order'] ) : '';
 
   $taxonomy = $cpt . '-categories';
-  $portfolio_posts_per_page = get_option( 'astrodj_portfolio_posts_per_page' );
+  $portfolio_posts_per_page = get_option( "astrodj_{$cpt}_posts_per_page" );
 
   $args = array(
     'post_type'      => $cpt,
@@ -179,7 +179,7 @@ function astrodj_widget_filter_query_init() {
   }
 
   $cpt = get_query_var( 'post_type' );
-  $portfolio_posts_per_page = get_option( 'astrodj_portfolio_posts_per_page' );
+  $portfolio_posts_per_page = get_option( "astrodj_{$cpt}_posts_per_page" );
 
   $args = array(
     'post_type'      => $cpt,
