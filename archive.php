@@ -13,7 +13,12 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 			
-		<?php astrodj_placeholder_content_preloader(); ?>
+		<?php
+		/**
+		 * astrodj_placeholder_content_preloader - 10
+		 */
+		do_action( 'astrodj_before_content' );
+		?>
 			
 		<?php if ( have_posts() ) : ?>
 

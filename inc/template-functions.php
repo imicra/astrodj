@@ -14,7 +14,7 @@
 function astrodj_body_classes( $classes ) {
 	if ( is_front_page() ) {
 		$classes[] = 'front-page';
-		$classes[] = 'frontpage__loader';
+		// $classes[] = 'frontpage__loader';
 	}
 
 	// Adds a class of hfeed to non-singular pages.
@@ -39,9 +39,9 @@ function astrodj_body_classes( $classes ) {
 	}
 
 	// Adds a class for content placeholder loading.
-	if ( is_home() || is_archive() || is_search() ) {
-		$classes[] = 'placeholder__preloading';
-	}
+	// if ( is_home() || is_archive() || is_search() ) {
+	// 	$classes[] = 'placeholder__preloading';
+	// }
 
 	// for cpt used iframe
 	if ( is_singular( array( 'cats' ) ) ) {

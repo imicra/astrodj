@@ -47,8 +47,8 @@
 
       init_posts_query(countPosts);
     } else {
-      $('#frontpage__loader').remove();
-      $('body').removeClass('frontpage__loader');
+      // $('#frontpage__loader').remove();
+      // $('body').removeClass('frontpage__loader');
 
       infinite_post_trigger();
     }
@@ -66,8 +66,8 @@
       .done(function(res) {
         $('#loader_container').before(res);
 
-        $('#frontpage__loader').remove();
-        $('body').removeClass('frontpage__loader');
+        // $('#frontpage__loader').remove();
+        // $('body').removeClass('frontpage__loader');
 
         astrodj_lqip();
         infinite_post_trigger();

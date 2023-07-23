@@ -13,7 +13,12 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
-			<?php astrodj_placeholder_gallery_preloader(); ?>
+			<?php
+			/**
+			 * astrodj_placeholder_gallery_preloader - 10
+			 */
+			do_action( 'astrodj_gallery_before_content' );
+			?>
 
 			<?php if ( have_posts() ) : ?>
 				<div class="portfolio-content page-limit" data-page="<?php echo $_SERVER["REQUEST_URI"]; ?>">

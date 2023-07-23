@@ -222,7 +222,8 @@
 
           if (is_archive_view) {
             $('#main').html(placeholder_archive);
-          } else {
+          }
+          else {
             $('#main').html(placeholder__gallery);
           }
           

@@ -74,33 +74,6 @@ function astrodj_posts_pagination( $args = [], $class = 'pagination' ) {
 require_once dirname( __FILE__ ) . '/post-nav.php';
 
 /**
- * Placeholder Content Murkup.
- * Used for page loading placeholder.
- */
-function astrodj_placeholder_content_preloader() {
-	?>
-	<div id="placeholder__content">
-		<div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-		<div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-		<div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-		<div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-	</div>
-	<?php
-}
-
-function astrodj_placeholder_gallery_preloader() {
-	?>
-	<div id="placeholder__gallery">
-		<div class="placeholder__gallery-item"><?php echo astrodj_get_svg( array( 'icon' => 'image' ) ); ?></div>
-		<div class="placeholder__gallery-item"><?php echo astrodj_get_svg( array( 'icon' => 'image' ) ); ?></div>
-		<div class="placeholder__gallery-item"><?php echo astrodj_get_svg( array( 'icon' => 'image' ) ); ?></div>
-		<div class="placeholder__gallery-item"><?php echo astrodj_get_svg( array( 'icon' => 'image' ) ); ?></div>
-		<div class="placeholder__gallery-item"><?php echo astrodj_get_svg( array( 'icon' => 'image' ) ); ?></div>
-	</div>
-	<?php
-}
-
-/**
  * Edit default WordPress widgets.
  */
 function astrodj_tag_cloud_font_change( $args ) {
@@ -122,6 +95,11 @@ function astrodj_list_categories_output_change( $links ) {
 	
 }
 add_filter( 'wp_list_categories', 'astrodj_list_categories_output_change' );
+
+/**
+ * Hooks.
+ */
+require_once dirname( __FILE__ ) . '/hooks.php';
 
 /**
  * Portfolio Dropdown Menu.

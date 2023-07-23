@@ -74,12 +74,12 @@
           <div>Последние записи</div>
         </header>
         <div class="recent-posts-inner">
-          <div id="frontpage__loader">
-            <div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-            <div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-            <div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-            <div class="loader-placeholder" style="display: block;"><div></div><div></div><div></div></div>
-          </div>
+          <?php
+          /**
+           * astrodj_placeholder_frontpage_preloader - 10
+           */
+          do_action( 'astrodj_frontpage_before_content' );
+          ?>
           <?php
           // Get the latest post
           $args = array(
