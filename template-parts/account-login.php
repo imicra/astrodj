@@ -17,26 +17,26 @@
       $frontpage_avatar_img_ID = attachment_url_to_postid( $frontpage_avatar );
       $avatar_url = wp_get_attachment_image_src( $frontpage_avatar_img_ID, 'full' );
     ?>
-    <figure class="widget_account__logo">
-      <a href="<?php echo wp_login_url(); ?>" class="custom-logo-link">
-        <img width="<?php echo $avatar_url[1] ?>" height="<?php echo $avatar_url[2] ?>" class="custom-logo" src="<?php echo $frontpage_avatar ?>" alt="Vaz Zhigalov">
-      </a>
-      <?php if ( ! empty( $frontpage_username ) ) : ?>
-      <figcaption class="user"><?php echo $frontpage_username ?></figcaption>
-      <?php endif; ?>
-    </figure>
+      <figure class="widget_account__logo">
+        <a href="<?php echo wp_login_url(); ?>" class="custom-logo-link">
+          <img width="<?php echo $avatar_url[1] ?>" height="<?php echo $avatar_url[2] ?>" class="custom-logo" src="<?php echo $frontpage_avatar ?>" alt="Vaz Zhigalov">
+        </a>
+        <?php if ( ! empty( $frontpage_username ) ) : ?>
+          <figcaption class="user"><?php echo $frontpage_username ?></figcaption>
+        <?php endif; ?>
+      </figure>
     <?php else :
 
       wp_loginout( $_SERVER['REQUEST_URI'], true );
 
     endif; ?>
-    <div class="widget_account__btn">
-      <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Написать автору</a>
-    </div>
+    
+    <?php get_template_part( 'template-parts/contact', 'btn' ); ?>
+
     <?php if ( is_user_logged_in() ) : ?>
-    <div class="widget_account__logout">
-      <?php wp_loginout( $_SERVER['REQUEST_URI'], true ); ?>
-    </div>
+      <div class="widget_account__logout">
+        <?php wp_loginout( $_SERVER['REQUEST_URI'], true ); ?>
+      </div>
     <?php endif; ?>
   </div>
 </section>
