@@ -31,7 +31,7 @@ function astrodj_include_cpt() {
 add_action( 'after_setup_theme', 'astrodj_include_cpt' );
 
 /**
- * 
+ * Posts per page.
  */
 function modify_cpt_query( $query ) {
 	if ( is_admin() ) {

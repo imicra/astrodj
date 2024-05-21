@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.2.4' );
+	define( '_S_VERSION', '1.3.0' );
 }
 
 if ( ! function_exists( 'astrodj_setup' ) ) :
@@ -52,6 +52,7 @@ if ( ! function_exists( 'astrodj_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'main' => esc_html__( 'Header', 'astrodj' ),
+			'sub_main' => esc_html__( 'Sub Header Menu', 'astrodj' ),
 			'social' => esc_html__( 'Social menu', 'astrodj' ),
 			'subpages' => esc_html__( 'Subpages menu', 'astrodj' ),
 			'frontpage' => esc_html__( 'Front Page menu', 'astrodj' ),

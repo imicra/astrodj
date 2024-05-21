@@ -10,7 +10,6 @@
 function astrodj_portfolio_posttypes() {
 
     // Customizer settings
-    $portfolio_title = get_theme_mod( 'portfolio_title', esc_html__( 'Фотогалерея', 'astrodj' ) );
     $portfolio_subtitle = get_theme_mod( 'portfolio_subtitle', esc_html__( 'Мои маленькие фотошедевры', 'astrodj' ) );
     if ( ! empty( $portfolio_subtitle ) ) {
         $subtitle = wp_kses_post( $portfolio_subtitle );
@@ -19,7 +18,7 @@ function astrodj_portfolio_posttypes() {
     }
     
     $labels = array(
-        'name'               => $portfolio_title,
+        'name'               => 'Фотогалерея',
         'singular_name'      => __( 'Portfolio item', 'astrodj' ),
         'menu_name'          => __( 'ФотоГалерея', 'astrodj' ),
         'name_admin_bar'     => __( 'Portfolio', 'astrodj' ),
@@ -79,13 +78,16 @@ function astrodj_portfolio_taxonomies() {
     );
 
     $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'show_in_rest'      => true,
-        'rewrite'           => array( 'slug' => 'portfolio-categories' ),
+        'public'             => true,
+        'publicly_queryable' => false,
+        'hierarchical'       => true,
+        'labels'             => $labels,
+        'show_ui'            => true,
+        'show_admin_column'  => true,
+        'query_var'          => true,
+        'show_in_rest'       => true,
+        'rewrite'            => array( 'slug' => 'portfolio-categories', 'with_front' => false ),
+        'show_in_nav_menus'  => false,
     );
 
     register_taxonomy( 'portfolio-categories', array( 'portfolio' ), $args );
@@ -111,6 +113,8 @@ function astrodj_portfolio_taxonomies() {
     );
 
     $args = array(
+        'public'                => true,
+        'publicly_queryable'    => false,
         'hierarchical'          => false,
         'labels'                => $labels,
         'show_ui'               => true,
@@ -118,7 +122,8 @@ function astrodj_portfolio_taxonomies() {
         'update_count_callback' => '_update_post_term_count',
         'query_var'             => true,
         'show_in_rest'          => true,
-        'rewrite'               => array( 'slug' => 'technics' ),
+        'rewrite'               => array( 'slug' => 'technics', 'with_front' => false ),
+        'show_in_nav_menus'     => false,
     );
 
     register_taxonomy( 'technics', array( 'portfolio', 'stock' ), $args );

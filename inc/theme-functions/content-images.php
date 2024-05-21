@@ -88,3 +88,15 @@ function image_tag_class($class, $id, $align, $size) {
 	return $class . ' lazy';
 }
 // add_filter('get_image_tag_class', 'image_tag_class', 10, 4);
+
+/**
+ * Automatically fill alt atribute based on post title.
+ */
+function change_empty_alt_to_title( $response ) {
+	if ( ! $response['alt'] ) {
+		$response['alt'] = sanitize_text_field( $response['uploadedToTitle'] );
+	}
+
+	return $response;
+}
+add_filter( 'wp_prepare_attachment_for_js', 'change_empty_alt_to_title' );

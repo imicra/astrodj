@@ -16,6 +16,10 @@
       'container'      => false,
       'menu_id'        => 'primary-menu',
     ) );
+
+    if ( has_nav_menu( 'sub_main' ) ) {
+      astrodj_dropdown_menu();
+    }
     ?>
     <?php get_template_part( 'template-parts/navigation/filter', 'button' ); ?>
   </div>

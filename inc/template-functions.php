@@ -93,9 +93,10 @@ add_action( 'pre_get_posts', 'astrodj_search_exclude_pages' );
  * Change Document Title Tag.
  */
 function astrodj_document_title_parts( $title ) {
-	if( isset( $title['page'] ) )
+	if ( isset( $title['page'] ) )
 		unset( $title['page'] );
 
+	// blog
 	if ( is_archive() && ! is_post_type_archive() ) {
 		//re-build and order
 		unset( $title['site'], $title['tagline'] );
@@ -104,9 +105,70 @@ function astrodj_document_title_parts( $title ) {
 		$title['site'] = get_bloginfo( 'name', 'display' );
 	}
 
+	if ( is_front_page() ) {
+		if ( get_option( 'astrodj_fp_tagline' ) ) {
+			$title['tagline'] = get_option( 'astrodj_fp_tagline' );
+		}
+	}
+
 	return $title;
 }
 add_filter( 'document_title_parts', 'astrodj_document_title_parts' );
+
+/**
+ * SEO <Description> on singular.
+ */
+function astrodj_seo_meta_tags() {
+	global $post;
+
+	$prefix = 'astrodj_';
+	$description = '';
+	$post_type = get_post_type_object( get_post_type( $post ) );
+
+	if ( is_singular() ) {
+		$description = get_post_meta( get_the_ID(), $prefix . 'seo_metabox_description', true );
+	} else if ( is_home() ) {
+		$description = get_post_meta( get_option( 'page_for_posts' ), $prefix . 'seo_metabox_description', true );
+	} else if ( is_post_type_archive() ) {
+		$description = get_option( 'astrodj_seo_description_' . $post_type->name );
+	}
+
+	if ( $description ) :
+	?>
+		<meta name="description" content="<?php echo $description; ?>" />
+	<?php
+	endif;
+}
+add_action( 'wp_head', 'astrodj_seo_meta_tags', 1 );
+
+/**
+ * SEO <Title> on singular.
+ */
+function astrodj_document_title( $title ) {
+	global $post;
+	
+	$prefix = 'astrodj_';
+	$post_type = get_post_type_object( get_post_type( $post ) );
+
+	if ( is_singular() ) {
+		$seo_title = get_post_meta( get_the_ID(), $prefix . 'seo_metabox_title', true );
+
+		if ( $seo_title ) {
+			$title = $seo_title . ' &#8212; ' . get_bloginfo( 'name' );
+		}
+	}
+
+	if ( is_post_type_archive() ) {
+		$seo_title = get_option( 'astrodj_seo_title_' . $post_type->name );
+
+		if ( $seo_title ) {
+			$title = $seo_title . ' &#8212; ' . get_bloginfo( 'name' );
+		}
+	}
+
+	return $title;
+}
+add_filter( 'pre_get_document_title', 'astrodj_document_title' );
 
 /**
  * Remove archive type words in Archive Title on Archive Pages.

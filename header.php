@@ -34,22 +34,23 @@
 				astrodj_the_custom_logo();
 				if ( is_front_page() || is_home() ) :
 				?>
-					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php astrodj_blog_name(); ?></a></h1>
 				<?php
 				elseif ( is_post_type_archive() ) :
 					$post_type = get_post_type_object( get_post_type( $post ) );
-					$title = $post_type->labels->name;
+					$title = get_theme_mod( $post_type->name . '_title' );
+
 					if ( ! empty( $title ) ) :
 					?>
 					<h1 class="site-title">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php astrodj_blog_name(); ?></a>
 						- <span><?php echo $title; ?></span>
 					</h1>
 					<?php
 					endif;
 				else :
 				?>
-					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php astrodj_blog_name(); ?></a></p>
 				<?php
 				endif;
 				?>

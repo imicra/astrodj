@@ -27,6 +27,22 @@ function astrodj_customize_register( $wp_customize ) {
 	}
 
 	/**
+	 * Title Tagline section
+	 */
+	$wp_customize->add_setting( 'astrodj_blogname', array(
+		'default'           => esc_html__( 'Astrodj', 'astrodj' ),
+		'sanitize_callback' => 'astrodj_sanitize_input',
+		'transport'	        => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'astrodj_blogname', array(
+		'label'         => esc_html__( 'Название сайта в Хэдере', 'astrodj' ),
+		'section'       => 'title_tagline',
+		'priority'      => 50,
+		'type'          => 'text',
+	));
+
+	/**
 	 * Front Page Avatar
 	 */
 	$wp_customize->add_section( 'frontpage_avatar', array(

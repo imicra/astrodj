@@ -16,6 +16,11 @@ require_once dirname( __FILE__ ) . '/admin-menu.php';
 require_once dirname( __FILE__ ) . '/media-uploader.php';
 
 /**
+ * Ajax save post meta in SEO metabox.
+ */
+require_once dirname( __FILE__ ) . '/seo-meta.php';
+
+/**
  * Extends Gutenderg.
  */
 require_once dirname( __FILE__ ) . '/gutenberg/gutenberg.php';
@@ -31,7 +36,7 @@ require_once dirname( __FILE__ ) . '/login-page.php';
 function astrodj_admin_scripts() {
   wp_enqueue_media();
 
-  wp_enqueue_script( 'astrodj-admin-script', get_template_directory_uri() . '/js/admin.inc.js', array( 'jquery' ), '1.0.0', true );
+  wp_enqueue_script( 'astrodj-admin-script', get_template_directory_uri() . '/js/admin.inc.js', array( 'jquery' ), _S_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'astrodj_admin_scripts' );
 

@@ -240,6 +240,16 @@
 		}
 	}
 
+	p:not(.first-paragraph, .last-paragraph) {
+
+		.single-post & {
+			
+			@media screen and (min-width: $bp__md) {
+				font-size: 1.2rem;
+			}
+		}
+	}
+
 	h2 {
 		font-weight: $font__semi-bold;
 		margin-top: 36px;

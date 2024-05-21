@@ -67,3 +67,30 @@ function astrodj_contact_form_cb() {
 
   wp_die();
 }
+
+/**
+ * SMTP for mail.ru
+ */
+function smtp_phpmailer_init( $phpmailer ) {
+	// only on hosting
+	if ( WP_DEBUG ) {
+		return;
+	}
+
+	$phpmailer->IsSMTP();
+
+	$phpmailer->CharSet    = 'UTF-8';
+
+	$phpmailer->Host       = 'smtp.mail.ru';
+	$phpmailer->Username   = 'astrodj@mail.ru';
+	$phpmailer->Password   = 'Qy1Vds9GMjfuFerTnyAi';
+	$phpmailer->SMTPAuth   = true;
+	$phpmailer->SMTPSecure = 'tls';
+
+	$phpmailer->Port       = 587;
+	$phpmailer->From       = 'contact@astrodj.ru';
+	$phpmailer->FromName   = 'Astrodj.ru Контактная Форма';
+
+	$phpmailer->isHTML( true );
+}
+// add_action( 'phpmailer_init', 'smtp_phpmailer_init' );

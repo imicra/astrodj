@@ -17,7 +17,7 @@
 			/* translators: %s = search query */
 			printf( esc_html__( 'Ничего не найдено по &ldquo;%s&rdquo;', 'astrodj'), get_search_query() );
 		else :
-			esc_html_e( 'Nothing Found', 'astrodj' );
+			esc_html_e( 'Ничего не найдено', 'astrodj' );
 		endif;
 		?>
 		</h1>
@@ -50,7 +50,7 @@
 		else :
 			?>
 
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'astrodj' ); ?></p>
+			<p><?php esc_html_e( 'Кажется, не нашлось то, что вы ищете. Возможно, поиск поможет.', 'astrodj' ); ?></p>
 			<?php
 			get_search_form();
 

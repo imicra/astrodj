@@ -464,7 +464,7 @@
           data_container = form.parent().prev('.form__data'),
           ajax_url = main_data.ajax_url;
 
-      $('#formHelp').html('Уходит...');
+      $('#formHelp').html('Подождите, письмо отправляется...');
       form.find('.form-footer').html('');
       
       $.ajax({

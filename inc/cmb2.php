@@ -97,7 +97,7 @@ function astrodj_register_portfolio_metabox() {
     $portfolio_post = new_cmb2_box( array(
         'id'            => $prefix . 'portfolio_post_metabox',
         'title'         => __( 'Мета', 'cmb2' ),
-        'object_types'  => array( 'portfolio', 'stock', 'cats' ), // Post type
+        'object_types'  => array( 'portfolio', 'stock', 'cats', 'archive' ), // Post type
         //'show_on'       => array( 'key' => 'id', 'value' => array( 2 ) ),
         'context'       => 'normal',
         'priority'      => 'high',
@@ -197,3 +197,52 @@ function astrodj_register_portfolio_metabox() {
     ) );
 }
 add_action( 'cmb2_init', 'astrodj_register_portfolio_metabox' );
+
+/**
+ * SEO metaboxes for singular.
+ */
+function astrodj_seo_metabox() {
+    $prefix = 'astrodj_';
+
+    $container = new_cmb2_box( array(
+        'id'            => $prefix . 'seo_metabox',
+        'title'         => __( 'SEO', 'cmb2' ),
+        'object_types'  => array( 'post', 'page', 'portfolio', 'stock' ), // Post type
+        'context'       => 'normal',
+        'priority'      => 'low',
+        'show_names'    => true, // Show field names on the left
+        'closed'        => true, // Keep the metabox closed by default
+    ) );
+
+    $container->add_field( array(
+        'name' => 'Title',
+        'description' => 'Title в head',
+        'id'   => $prefix . 'seo_metabox_title',
+        'type' => 'textarea_small',
+    ) );
+
+    $container->add_field( array(
+        'name' => 'Description',
+        'description' => 'Description в head',
+        'id'   => $prefix . 'seo_metabox_description',
+        'type' => 'textarea_small',
+    ) );
+
+    $container->add_field( array(
+        'name' => 'Сохранить',
+        'description' => 'Ajax сохранение только post_meta - только для изменения уже существующего',
+        'id'   => $prefix . 'seo_metabox_submit',
+        'type' => 'submit_ajax',
+        'default' => 'Изменить',
+    ) );
+}
+add_action( 'cmb2_init', 'astrodj_seo_metabox' );
+
+/**
+ * Render custom field type.
+ * Button type submit for ajax save post meta (avoiding save post).
+ */
+function astrodj_cmb_render_submit_ajax( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+	echo $field_type_object->input( array( 'class' => 'cmb2-submit-ajax components-button is-secondary', 'type' => 'submit', 'data-id' => get_the_ID() ) );
+}
+add_action( 'cmb2_render_submit_ajax', 'astrodj_cmb_render_submit_ajax', 10, 5 );

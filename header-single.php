@@ -28,7 +28,7 @@
 		<div class="site-branding">
 			<div class="site-branding__options">
 				<?php astrodj_the_custom_logo(); ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php astrodj_blog_name(); ?></a></p>
 			</div><!-- .site-options -->
 		</div><!-- .site-branding -->
 	</header><!-- #masthead -->

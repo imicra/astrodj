@@ -64,6 +64,34 @@
       } );
     });
 
+    /* ---------------------------------------------------------------------------
+    * Ajax save post meta in SEO metabox.
+    * --------------------------------------------------------------------------- */
+    $('#astrodj_seo_metabox_submit').on('click', function(e) {
+      e.preventDefault();
+
+      var $this = $(this),
+          container = $this.closest('.cmb2-wrap'),
+          title = container.find('#astrodj_seo_metabox_title').val(),
+          description = container.find('#astrodj_seo_metabox_description').val();
+
+      var data = {
+        action: 'astrodj_seo_metabox_submit',
+        id: $(this).data('id'),
+        title: title,
+        description: description
+      };
+
+      $this.val('Изменить');
+
+      $.post( ajaxurl, data, function( response ) {
+        if (response.success) {
+          $this.val('Готово');
+        } else {
+          $this.val('Ошибка');
+        }
+      } );
+    });
   });
 
 }(jQuery));

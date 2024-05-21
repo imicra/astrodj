@@ -122,4 +122,24 @@
   &.hide-menu {
     transform: translateY(-100%);
   }
+
+  .dropdown-wrapper {
+    line-height: 1;
+  }
+}
+
+.sub-navigation {
+
+  ul {
+    flex-direction: column;
+
+    li {
+      margin-right: 10px;
+      margin-left: 10px;
+
+      a {
+        text-align: center;
+      }
+    }
+  }
 }

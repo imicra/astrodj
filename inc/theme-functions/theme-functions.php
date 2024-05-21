@@ -74,6 +74,13 @@ function astrodj_posts_pagination( $args = [], $class = 'pagination' ) {
 require_once dirname( __FILE__ ) . '/post-nav.php';
 
 /**
+ * Display blog name in header.
+ */
+function astrodj_blog_name() {
+	echo get_theme_mod( 'astrodj_blogname', esc_html__( 'Astrodj', 'astrodj' ) );
+}
+
+/**
  * Edit default WordPress widgets.
  */
 function astrodj_tag_cloud_font_change( $args ) {

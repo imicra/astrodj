@@ -10,7 +10,6 @@
 function astrodj_cats_posttypes() {
 
     // Customizer settings
-    $cats_title = get_theme_mod( 'cats_title', esc_html__( 'Коты', 'astrodj' ) );
     $cats_subtitle = get_theme_mod( 'cats_subtitle', esc_html__( 'Коты и другие случайные собаки', 'astrodj' ) );
     if ( ! empty( $cats_subtitle ) ) {
         $subtitle = wp_kses_post( $cats_subtitle );
@@ -19,7 +18,7 @@ function astrodj_cats_posttypes() {
     }
     
     $labels = array(
-        'name'               => $cats_title,
+        'name'               => 'Коты',
         'singular_name'      => __( 'Cats item', 'astrodj' ),
         'menu_name'          => __( 'Коты', 'astrodj' ),
         'name_admin_bar'     => __( 'Cats', 'astrodj' ),
@@ -46,14 +45,14 @@ function astrodj_cats_posttypes() {
         'show_in_nav_menus'   => true,
         'show_in_rest'        => true,
         'menu_icon'           => 'dashicons-format-gallery',
-        'query_var'           => true,
         'rewrite'             => array( 'slug' => 'cats-photography', 'with_front' => false ),
         'capability_type'     => 'post',
         'has_archive'         => true,
-        'hierarchical'        => true,
+        'hierarchical'        => false,
         'menu_position'       => 22,
         'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
-        'taxonomies'          => array( 'cats-categories' )
+        'taxonomies'          => array( 'cats-categories' ),
+        'query_var'           => false,
     );
     register_post_type( 'cats', $args );
 }
@@ -79,14 +78,16 @@ function astrodj_cats_taxonomies() {
     );
 
     $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'show_in_rest'      => true,
-        'rewrite'           => array( 'slug' => 'cats-categories' ),
-        'show_in_nav_menus'   => false,
+        'public'             => true,
+        'publicly_queryable' => false,
+        'hierarchical'       => true,
+        'labels'             => $labels,
+        'show_ui'            => true,
+        'show_admin_column'  => true,
+        'query_var'          => true,
+        'show_in_rest'       => true,
+        'rewrite'            => array( 'slug' => 'cats-categories', 'with_front' => false ),
+        'show_in_nav_menus'  => false,
     );
 
     register_taxonomy( 'cats-categories', array( 'cats' ), $args );

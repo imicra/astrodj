@@ -62,3 +62,20 @@ function astrodj_dropdown_menu_content_front_page() {
   endif;
 }
 add_action( 'astrodj_dropdown_menu_content', 'astrodj_dropdown_menu_content_front_page' );
+
+function astrodj_dropdown_menu_content_main_nav() {
+  if ( ! is_singular( array( 'portfolio', 'stock', 'cats' ) ) && ! is_front_page() ) :
+  ?>
+    <nav id="sub-navigation" class="sub-navigation">
+      <?php
+      wp_nav_menu( array(
+        'theme_location' => 'sub_main',
+        'container'      => false,
+        'menu_id'        => 'sub-menu',
+      ) );
+      ?>
+    </nav>
+  <?php
+  endif;
+}
+add_action( 'astrodj_dropdown_menu_content', 'astrodj_dropdown_menu_content_main_nav' );

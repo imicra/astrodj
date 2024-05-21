@@ -10,7 +10,6 @@
 function astrodj_archive_posttypes() {
 
     // Customizer settings
-    $archive_title = get_theme_mod( 'archive_title', esc_html__( 'Архив', 'astrodj' ) );
     $archive_subtitle = get_theme_mod( 'archive_subtitle', esc_html__( 'Архивные фото', 'astrodj' ) );
     if ( ! empty( $archive_subtitle ) ) {
         $subtitle = wp_kses_post( $archive_subtitle );
@@ -19,7 +18,7 @@ function astrodj_archive_posttypes() {
     }
     
     $labels = array(
-        'name'               => $archive_title,
+        'name'               => 'Архив',
         'singular_name'      => __( 'Архив элемент', 'astrodj' ),
         'menu_name'          => __( 'Архив', 'astrodj' ),
         'name_admin_bar'     => __( 'Архив', 'astrodj' ),

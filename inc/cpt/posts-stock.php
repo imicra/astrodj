@@ -10,7 +10,6 @@
 function astrodj_stock_posttypes() {
 
     // Customizer settings
-    $stock_title = get_theme_mod( 'stock_title', esc_html__( 'Сток', 'astrodj' ) );
     $stock_subtitle = get_theme_mod( 'stock_subtitle', esc_html__( 'Интересные снимки, но не шедевры', 'astrodj' ) );
     if ( ! empty( $stock_subtitle ) ) {
         $subtitle = wp_kses_post( $stock_subtitle );
@@ -19,7 +18,7 @@ function astrodj_stock_posttypes() {
     }
     
     $labels = array(
-        'name'               => $stock_title,
+        'name'               => 'Сток',
         'singular_name'      => __( 'Stock item', 'astrodj' ),
         'menu_name'          => __( 'Сток', 'astrodj' ),
         'name_admin_bar'     => __( 'Stock', 'astrodj' ),
@@ -79,14 +78,16 @@ function astrodj_stock_taxonomies() {
     );
 
     $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'show_in_rest'      => true,
-        'rewrite'           => array( 'slug' => 'stock-categories' ),
-        'show_in_nav_menus'   => false,
+        'public'             => true,
+        'publicly_queryable' => false,
+        'hierarchical'       => true,
+        'labels'             => $labels,
+        'show_ui'            => true,
+        'show_admin_column'  => true,
+        'query_var'          => true,
+        'show_in_rest'       => true,
+        'rewrite'            => array( 'slug' => 'stock-categories', 'with_front' => false ),
+        'show_in_nav_menus'  => false,
     );
 
     register_taxonomy( 'stock-categories', array( 'stock' ), $args );
