@@ -10,8 +10,9 @@ $portfolio_header_img = get_theme_mod( 'portfolio_header_img' );
 $stock_header_img = get_theme_mod( 'stock_header_img' );
 $cats_header_img = get_theme_mod( 'cats_header_img' );
 $archive_header_img = get_theme_mod( 'archive_header_img' );
+$shop_tpl_header_img = get_theme_mod( 'shop_tpl_header_img' );
 
-if ( get_header_image() && ! is_post_type_archive() ) :
+if ( get_header_image() && ! is_post_type_archive() && ! is_page_template( 'template-shop.php' ) ) :
 
   $lq_url = wp_get_attachment_image_url( get_custom_header()->attachment_id, 'medium_large' );
   $hq_url = wp_get_attachment_image_url( get_custom_header()->attachment_id, 'full' );
@@ -37,6 +38,12 @@ elseif ( '' !== $cats_header_img && is_post_type_archive( 'cats' ) ) :
 elseif ( $archive_header_img && is_post_type_archive( 'archive' ) ) :
 
   $post_type_archive_header_img_ID = attachment_url_to_postid( $archive_header_img );
+  $lq_url = wp_get_attachment_image_url( $post_type_archive_header_img_ID, 'medium_large' );
+  $hq_url = wp_get_attachment_image_url( $post_type_archive_header_img_ID, 'full' );
+
+elseif ( '' !== $shop_tpl_header_img && is_page_template( 'template-shop.php' ) ) :
+
+  $post_type_archive_header_img_ID = attachment_url_to_postid( $shop_tpl_header_img );
   $lq_url = wp_get_attachment_image_url( $post_type_archive_header_img_ID, 'medium_large' );
   $hq_url = wp_get_attachment_image_url( $post_type_archive_header_img_ID, 'full' );
 

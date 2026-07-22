@@ -24,6 +24,7 @@ add_action( 'admin_menu', 'astrodj_add_admin_page' );
 // General Page
 function astrodj_theme_general_settings() {
   register_setting( 'astrodj-settings-group', 'astrodj_rights' );
+  register_setting( 'astrodj-settings-group', 'astrodj_price' );
   register_setting( 'astrodj-settings-group', 'astrodj_portfolio_posts_per_page' );
   register_setting( 'astrodj-settings-group', 'astrodj_stock_posts_per_page' );
   register_setting( 'astrodj-settings-group', 'astrodj_cats_posts_per_page' );
@@ -32,6 +33,7 @@ function astrodj_theme_general_settings() {
   add_settings_section( 'astrodj-general-options', 'Главные настройки', 'astrodj_general_options_cb', 'astrodj_admin' );
 
   add_settings_field( 'rights-name', 'Имя автора снимков в Копирайте', 'astrodj_rights_name_cb', 'astrodj_admin', 'astrodj-general-options' );
+  add_settings_field( 'rights-price', 'Цена фото', 'astrodj_price_cb', 'astrodj_admin', 'astrodj-general-options' );
   add_settings_field( 'portfolio-posts-per-page', 'На страницах галерей отображать не более', 'astrodj_portfolio_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
   add_settings_field( 'stock-posts-per-page', 'На страницах сток отображать не более', 'astrodj_stock_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
   add_settings_field( 'cats-posts-per-page', 'На страницах коты отображать не более', 'astrodj_cats_posts_per_page_cb', 'astrodj_admin', 'astrodj-general-options' );
@@ -90,6 +92,11 @@ function astrodj_other_options_cb() {
 function astrodj_rights_name_cb() {
   $astrodj_rights = esc_attr( get_option( 'astrodj_rights' ) );
   echo '<input type="text" name="astrodj_rights" value="' . $astrodj_rights . '" placeholder="Vas Zhigalov" />';
+}
+
+function astrodj_price_cb() {
+  $astrodj_price = esc_attr( get_option( 'astrodj_price' ) );
+  echo '<input type="text" name="astrodj_price" value="' . $astrodj_price . '" />';
 }
 
 function astrodj_portfolio_posts_per_page_cb() {

@@ -219,7 +219,9 @@
 
 .entry-content {
 	p:not(.first-paragraph),
-	h2, h3 {
+	h2, h3,
+	ul,
+	hr {
 		@media screen and (min-width: $bp__md) {
 			max-width: $size__max-width--small;
 			margin-left: auto;
@@ -251,17 +253,32 @@
 	}
 
 	h2 {
+		@include font-size(1.4);
 		font-weight: $font__semi-bold;
+		line-height: 1;
 		margin-top: 36px;
 		margin-bottom: 12px;
+
+		@media screen and (min-width: $bp__md) {
+			@include font-size(1.6);
+			line-height: $font__line-height-body;
+		}
 	}
 
 	h3 {
 		font-weight: $font__semi-bold;
+		line-height: 1;
+
+		@media screen and (min-width: $bp__md) {
+			line-height: $font__line-height-body;
+		}
 	}
 
 	ul {
+		padding-left: 0;
+		
 		li {
+			margin-left: 1em;
 			margin-bottom: 1em;
 		}
 	}
@@ -356,6 +373,24 @@
 		p:not(.first-paragraph) {
 			font-size: 1em;
 			padding: 0;
+		}
+	}
+
+	.icons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 2em;
+
+		.icon-facebook-g {
+			width: 30px;
+			height: 30px;
+		}
+
+		.icon-vk {
+			width: 42px;
+			height: 39px;
 		}
 	}
 }

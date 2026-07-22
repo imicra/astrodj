@@ -572,12 +572,186 @@
       if (field === "") return false;
       // /^([A-Za-z0-9]+\.[A-Za-z0-9]+(\r)?(\n)?)+$/
       // /^\s*[А-Яа-яA-Za-z0-9]+\.*/;
-      var reg = /^\s*[А-Яа-яA-Za-z0-9\.ёЁ]{3,}\.*/;
+      var reg = /^\s*[А-Яа-яA-Za-z0-9\.ёЁ]{2,}\.*/;
       if (!reg.test(field.trim())) {
         return false;
       }
       return "";
     }
+
+    /* ---------------------------------------------------------------------------
+    * Modal Form Shop
+    * --------------------------------------------------------------------------- */
+    // form popup
+    $('.shopForm').on('submit', function(e) {
+      e.preventDefault();
+
+      var form = $(this),
+          btn = form.find('button'),
+          name = form.find('#name').val(),
+          email = form.find('#email').val(),
+          city = form.find('#city').val(),
+          message = form.find('#message').val(),
+          list = $('.astrodj-shop-modal').find('.list'),
+          price = $('.astrodj-shop-modal').find('.price').text(),
+          order = '',
+          ajax_url = main_data.ajax_url;
+
+      // validation
+      var inputs = form.find('.required');
+      var valids = 0;
+      inputs.each(function() {
+        if ($(this).val() === '') {
+          $(this).addClass('error');
+          valids -= 1;
+        } else {
+          $(this).removeClass('error');
+          valids += 1;
+        }
+      })
+
+      if (inputs.length === valids) {
+        list.find('li').each(function() {
+          order += $(this).text() + ',';
+        });
+
+        btn.prop('disabled', true);
+        btn.find('.text').addClass('hidden');
+        btn.find('.loader').addClass('active');
+
+        $.ajax({
+          type: 'post',
+          url: ajax_url,
+          data: {
+            order: order,
+            price: price,
+            name: name,
+            email: email,
+            city: city,
+            message: message,
+            action: 'astrodj_shop_form'
+          },
+          error: function(response) {
+            if (debug) {
+              console.log(response);
+            }
+          },
+          success: function(response) {
+            if (response.success) {
+              $.fancybox.close();
+
+              $.fancybox.open({
+                src  : '#success_modal',
+                type : 'inline',
+              });
+            }
+          }
+        }).done(function() {
+          form.find('.form-control').val('');
+          form.trigger('reset');
+          btn.prop('disabled', false);
+          btn.find('.text').removeClass('hidden')
+          btn.find('.loader').removeClass('active')
+        });
+      }
+    });
+
+    /* ---------------------------------------------------------------------------
+    * Shop Calculator
+    * --------------------------------------------------------------------------- */
+    $('.shop-cart').on('click', function() {
+      var container = $(this).closest('.astrodj-shop');
+      var checkbox = container.find('input:checkbox');
+      var list = $('.astrodj-shop-modal').find('.list');
+      var priceText = $('.astrodj-shop-modal').find('.price');
+      var sum = 0;
+      var text = '';
+
+      checkbox.prop('checked', true);
+
+      $('.astrodj-shop-container').find('input:checkbox:checked').each(function() {
+        var title = $(this).val();
+        var price = parseInt($(this).data('price'));
+
+        sum += price;
+
+        text += '<li>' + title + '</li>';
+      });
+
+      priceText.text(sum);
+      list.html(text);
+    });
+
+    /* ---------------------------------------------------------------------------
+    * Portfolio and Stock Shopping Cart button.
+    * --------------------------------------------------------------------------- */
+    //  cart button on archives
+    $(document).on('click', '.dropdown-wrapper', function() {
+      var id = $(this).attr('data-id');
+
+      $('.singleShopForm').find('[name="id"]').val(id)
+    });
+
+    // form popup
+    $('.singleShopForm').on('submit', function(e) {
+      e.preventDefault();
+
+      var form = $(this),
+          btn = form.find('button'),
+          email = form.find('#email').val(),
+          post_id = form.find('[name="id"]').val(),
+          ajax_url = main_data.ajax_url;
+
+      // validation
+      var inputs = form.find('.required');
+      var valids = 0;
+      inputs.each(function() {
+        if ($(this).val() === '') {
+          $(this).addClass('error');
+          valids -= 1;
+        } else {
+          $(this).removeClass('error');
+          valids += 1;
+        }
+      })
+
+      if (inputs.length === valids) {
+        btn.prop('disabled', true);
+        btn.find('.text').addClass('hidden');
+        btn.find('.loader').addClass('active');
+
+        $.ajax({
+          type: 'post',
+          url: ajax_url,
+          data: {
+            email: email,
+            post_id: post_id,
+            action: 'astrodj_single_shop_form'
+          },
+          error: function(response) {
+            if (debug) {
+              console.log(response);
+            }
+          },
+          success: function(response) {
+            if (response.success) {
+              $.fancybox.close();
+
+              $.fancybox.open({
+                src  : '#success_modal',
+                type : 'inline',
+              });
+            }
+          }
+        }).done(function() {
+          form.find('.form-control').val('');
+          form.trigger('reset');
+          btn.prop('disabled', false);
+          btn.find('.text').removeClass('hidden')
+          btn.find('.loader').removeClass('active')
+        });
+      }
+    });
     
     /* ---------------------------------------------------------------------------
     * Page Navigation by Subpages.

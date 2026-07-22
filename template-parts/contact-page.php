@@ -20,6 +20,16 @@
 		<?php
 		the_content();
 		?>
+		<div class="has-text-align-left">
+			<div class="icons">
+				<a href="https://www.facebook.com/profile.php?id=100003196342075" target="_blank">
+					<?php echo astrodj_get_svg( array( 'icon' => 'facebook-g' ) ); ?>
+				</a>
+				<a href="https://vk.com/vas.zhigalov" target="_blank">
+					<?php echo astrodj_get_svg( array( 'icon' => 'vk' ) ); ?>
+				</a>
+			</div>
+		</div>
 		<div class="form__wrapper centered mobile">
 			<div class="form__data"></div>
 			<div class="form__container">
@@ -36,16 +46,16 @@
 					</div>
 					<div class="form-group">
 						<label for="message">Письмо</label>
-						<textarea name="message" class="form-control" id="message" rows="5" cols="30" data-pattern="^\s*[А-Яа-яA-Za-z0-9\.ёЁ]{3,}\.*" placeholder="Текст письма..." required></textarea>
+						<textarea name="message" class="form-control" id="message" rows="5" cols="30" data-pattern="^\s*[А-Яа-яA-Za-z0-9\.ёЁ]{2,}\.*" placeholder="Текст письма..." required></textarea>
 						<small id="nameHelp" class="form-text text-danger">Error message</small>
 					</div>
 					<div class="form-group">
-						<span id="formHelp" class="form-text form-help">Все поля обязательны для заполнения</span>
+						<span id="formHelp" class="form-text form-help">Заполните пожалуйста все поля</span>
 					</div>
 					<div class="form-footer"></div>
 				</form>
-			</div><!-- .contact-form__container -->
-		</div><!-- .form__wrapper -->
+			</div>
+		</div>
 	</div><!-- .entry-content -->
 
 	<?php if ( get_edit_post_link() ) : ?>

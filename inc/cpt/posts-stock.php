@@ -84,7 +84,7 @@ function astrodj_stock_taxonomies() {
         'labels'             => $labels,
         'show_ui'            => true,
         'show_admin_column'  => true,
-        'query_var'          => true,
+        'query_var'          => false,
         'show_in_rest'       => true,
         'rewrite'            => array( 'slug' => 'stock-categories', 'with_front' => false ),
         'show_in_nav_menus'  => false,

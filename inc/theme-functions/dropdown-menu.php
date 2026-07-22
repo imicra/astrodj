@@ -5,7 +5,10 @@
  * @package astrodj
  */
 
- function astrodj_dropdown_menu() {
+/**
+ * Portfolio and Stock dropdown menu.
+ */
+function astrodj_dropdown_menu() {
   ?>
   <div class="dropdown-wrapper">
     <button class="dropdown-button" aria-describedby="tooltip">
@@ -21,7 +24,23 @@
     </div><!-- .dropdown-menu__wrapper -->
   </div><!-- .dropdown-wrapper -->
   <?php
- }
+}
+
+/**
+ * Portfolio and Stock Shopping Cart button.
+ */
+function astodj_cart_button() {
+  ?>
+  <div class="dropdown-wrapper" data-id="<?php the_ID(); ?>" data-fancybox data-src="#single_shop_form" href="javascript:;">
+    <span>Купить</span>
+    <button class="cart-button">
+      <?php
+      echo astrodj_get_svg( array( 'icon' => 'cart' ) );
+      ?>
+    </button>
+  </div><!-- .dropdown-wrapper -->
+  <?php
+}
 
 /**
  * Portfolio and Stock.

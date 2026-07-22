@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.3.0' );
+	define( '_S_VERSION', '1.4.6' );
 }
 
 if ( ! function_exists( 'astrodj_setup' ) ) :
@@ -55,6 +55,7 @@ if ( ! function_exists( 'astrodj_setup' ) ) :
 			'sub_main' => esc_html__( 'Sub Header Menu', 'astrodj' ),
 			'social' => esc_html__( 'Social menu', 'astrodj' ),
 			'subpages' => esc_html__( 'Subpages menu', 'astrodj' ),
+			'subpages-shop' => esc_html__( 'Submenu Shop', 'astrodj' ),
 			'frontpage' => esc_html__( 'Front Page menu', 'astrodj' ),
 			'login' => esc_html__( 'Login Page menu', 'astrodj' ),
 		) );
@@ -386,6 +387,111 @@ if ( is_admin() ) {
 	 */
 	add_filter( 'pre_site_transient_browser_'. md5( $_SERVER['HTTP_USER_AGENT'] ), '__return_empty_array' );
 }
+
+/**
+ * Additions for robots.txt
+ * -1 before wp-sitemap.xml
+ */
+function astrodj_robots_txt_append( $output ) {
+
+	$str = '
+	Disallow: /cgi-bin                    # Стандартная папка на хостинге.
+	Disallow: /wp-admin/                  # Закрываем админку.
+	Disallow: /wp-json/                   # Закрываем админку.
+	Disallow: /?                          # Все параметры запроса на главной.
+	Disallow: *?s=                        # Поиск.
+	Disallow: *&s=                        # Поиск.
+	Disallow: /search                     # Поиск.
+	Disallow: /author/                    # Архив автора.
+	Disallow: */embed                     # Все встраивания.
+	Disallow: */page/                     # Все виды пагинации.
+	Disallow: */xmlrpc.php                # Файл WordPress API
+	Disallow: *utm*=                      # Ссылки с utm-метками
+	Disallow: *openstat=                  # Ссылки с метками openstat
+	Disallow: /cats-photography/          # single cats
+	Disallow: /archive-photography/       # single archive
+	Disallow: /blog/technics/             # cpt taxonomy
+	Disallow: /blog/stock-categories/     # cpt taxonomy
+	Disallow: /blog/portfolio-categories/ # cpt taxonomy
+	Disallow: /blog/cats-categories/      # cpt taxonomy
+	';
+
+	$str = trim( $str );
+	$str = preg_replace( '/^[\t ]+(?!#)/mU', '', $str );
+	$output .= "$str\n";
+
+	return $output;
+}
+add_action( 'robots_txt', 'astrodj_robots_txt_append', -1 );
+
+/**
+ * Remove users from sitemap.
+ */
+function astrodj_remove_sitemap_user( $provider, $name ) {
+	$remove_providers = [ 'users' ];
+
+	if ( in_array( $name, $remove_providers ) ) {
+		return false;
+	}
+
+	return $provider;
+}
+add_filter( 'wp_sitemaps_add_provider', 'astrodj_remove_sitemap_user', 10, 2 );
+
+/**
+ * Remove cats and archive cpt from sitemap.
+ */
+function astrodj_remove_sitemaps_post_types( $post_types ) {
+	unset( $post_types['cats'] );
+	unset( $post_types['archive'] );
+
+	return $post_types;
+}
+add_filter( 'wp_sitemaps_post_types', 'astrodj_remove_sitemaps_post_types' );
+
+/**
+ * Last-Modified и If-Modified-Since.
+ */
+function imicra_add_last_modified_header( $headers ) {
+    //Check if we are in a single post of any type (archive pages has not modified date)
+    if ( is_singular() ) {
+        $modified_date = strtotime( get_queried_object()->post_modified_gmt );
+        header( 'Last-Modified: '.gmdate('D, d M Y H:i:s', $modified_date).' GMT' );
+
+        if ( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $modified_date ) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'imicra_add_last_modified_header' );
+
+function astrodj_yandex_metrica() {
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		return;
+	}
+
+	if ( is_singular( 'archive' ) ) {
+		return;
+	}
+
+	?>
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript">
+			(function(m,e,t,r,i,k,a){
+					m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+					m[i].l=1*new Date();
+					for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+					k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+			})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106163709', 'ym');
+
+			ym(106163709, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/106163709" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	<?php
+}
+add_action( 'wp_head', 'astrodj_yandex_metrica' );
 
 /**
  * Implement the Custom Header feature.

@@ -6,6 +6,11 @@
  */
 
 /**
+ * Customizing admin.
+ */
+require_once dirname( __FILE__ ) . '/admin-customize.php';
+
+/**
  * Admin Menu.
  */
 require_once dirname( __FILE__ ) . '/admin-menu.php';

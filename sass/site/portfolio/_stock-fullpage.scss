@@ -141,12 +141,20 @@
     }
   }
 
-  .entry-title {
-    font-family: $font__sans;
-    font-size: 1.6em;
-    font-weight: $font__normal;
-    line-height: 1;
+  .entry-header {
     margin-bottom: 1em;
+
+    .entry-title {
+      font-family: $font__sans;
+      font-size: 1.6em;
+      font-weight: $font__normal;
+      line-height: 1;
+    }
+
+    .entry-subtitle {
+      font-size: 1em;
+      font-weight: $font__normal;
+    }
   }
 
   .media-exif__wrapper {

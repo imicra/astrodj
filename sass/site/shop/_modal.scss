@@ -1,0 +1,114 @@
+.modal-shop {
+  border-radius: 10px;
+  width: 600px;
+
+  @media screen and (max-width: 768px) {
+    padding: 16px;
+  }
+}
+
+.astrodj-shop-modal {
+
+  .modal-header {
+
+    .title {
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+      font-weight: $font__semi-bold;
+      margin-bottom: .5em;
+    }
+
+    .small {
+      font-size: clamp(.8rem, 2vw, .9rem);
+      line-height: 1.3;
+    }
+
+    .soc {
+      font-size: clamp(1.1rem, 2vw, 1.2rem);
+      margin-bottom: .5em;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+
+      .icon-facebook-g {
+        width: 30px;
+        height: 30px;
+      }
+
+      .icon-vk {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    ul {
+      font-size: clamp(.9rem, 2vw, 1rem);
+      list-style: none;
+      padding: 0;
+    }
+
+    .summary {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.3;
+      margin-top: 1em;
+      margin-bottom: 1em;
+
+      .price {
+        font-weight: $font__bold;
+      }
+
+      .small {
+        font-size: clamp(.9rem, 2vw, 1rem);
+      }
+    }
+  }
+
+  .form {
+
+    button {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      padding: .8em 1.2em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      width: 100%;
+      position: relative;
+
+      @media screen and (min-width: 768px) {
+        margin-bottom: 0;
+        width: auto;
+      }
+
+      .loader {
+        display: none;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        top: calc(50% - 25px / 2);
+        left: calc(50% - 25px / 2);
+        animation: spinner .6s linear infinite;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      .text {
+
+        &.hidden {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+.modal-success {
+
+  .title,
+  .thanks {
+    text-align: center;
+  }
+}

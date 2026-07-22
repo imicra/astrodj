@@ -54,5 +54,7 @@ get_header();
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
+	<?php get_template_part( 'template-parts/single', 'shop-modal' ); ?>
+
 <?php
 get_footer();

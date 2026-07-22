@@ -73,6 +73,11 @@
               var img_width = featured_object.media_details.sizes.full.width;
               var img_height = featured_object.media_details.sizes.full.height;
               feat_image = '<a href="' + object.link + '" data-hash-id="' + object.id + '">' +
+                          '<div class="dropdown-wrapper" data-id="' + object.id + '" data-fancybox data-src="#single_shop_form" href="javascript:;">' +
+                          '<span>Купить</span>' +
+                          '<button class="cart-button">' +
+                          '<svg class="icon icon-cart" aria-hidden="true" role="img"><use href="#icon-cart" xlink:href="#icon-cart"></use></svg>' +
+                          '</button></div>' +
                           '<figure class="astrodj-lqip" data-alt="' + featured_object.alt_text + '" ' +
                           'data-src="' + featured_object.media_details.sizes.full.source_url + '" ' +
                           '>' + 
@@ -85,7 +90,8 @@
                           '<img width="' + img_width + '" height="' + img_height + '" class="lazy">' + 
                           '</div>' +
                           '<figcaption>' +
-                          '<h2 class="entry-title">' + object.title.rendered + '</h2>'+
+                          '<h2 class="entry-title">' + object.title.rendered + 
+                          '<br><span>[Заказать фотографию]</span>' + '</h2>'+
                           '</figcaption>' +
                           '</figure>' +
                           '</a>';

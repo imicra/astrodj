@@ -109,10 +109,16 @@ function astrodj_post_thumbnail_lqip_ratio_settings( $ratio ) {
  * Portfolio and Stock Post Title.
  */
 function astrodj_post_thumbnail_lqip_portfolio_post_title() {
-  if ( is_post_type_archive() ) :
+  if ( is_post_type_archive() && ! is_post_type_archive( 'archive' ) ) :
   ?>
   <figcaption>
-    <?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
+    <?php the_title( '<p class="entry-title">', '<br><span>[Заказать фотографию]</span></p>' ); ?>
+  </figcaption>
+  <?php
+  elseif ( is_post_type_archive( 'archive' ) ) :
+  ?>
+  <figcaption>
+    <?php the_title( '<p class="entry-title">', '</p>' ); ?>
   </figcaption>
   <?php
   endif;
@@ -141,7 +147,7 @@ function astrodj_post_thumbnail_lqip_single_excerpt() {
  * Single Post Fancybox.
  */
 function astrodj_post_thumbnail_lqip_fancybox_start( $full_attributes ) {
-  if ( is_single() || 'archive' === get_post_type() ) :
+  if ( is_single() || in_array( get_post_type(), ['archive', 'shop'] ) ) :
   ?>
     <a href="<?php echo $full_attributes[0]; ?>" class="fancybox">
   <?php
@@ -150,7 +156,7 @@ function astrodj_post_thumbnail_lqip_fancybox_start( $full_attributes ) {
 add_action( 'astrodj_post_thumbnail_lqip_before_image', 'astrodj_post_thumbnail_lqip_fancybox_start' );
 
 function astrodj_post_thumbnail_lqip_fancybox_end() {
-  if ( is_single() || 'archive' === get_post_type() ) : ?>
+  if ( is_single() || in_array( get_post_type(), ['archive', 'shop'] ) ) : ?>
   </a>
   <?php
   endif;

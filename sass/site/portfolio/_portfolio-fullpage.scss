@@ -187,11 +187,15 @@
     }
   }
 
-  .entry-title {
-    font-family: $font__sans;
-    font-size: 1.6em;
-    font-weight: $font__semi-bold;
-    margin-bottom: 1em;
+  .entry-header {
+    margin-bottom: 2em;
+
+    .entry-title {
+      font-family: $font__sans;
+      font-size: 1.6em;
+      font-weight: $font__semi-bold;
+      margin-bottom: 0;
+    }
   }
 
   .meta-content {
@@ -250,6 +254,7 @@
   .post-thumbnail__menu {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     span {
       font-size: .7em;

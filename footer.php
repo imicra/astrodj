@@ -21,6 +21,7 @@
 				<span class="dev">
 					&copy; 2019 - <?php echo date( 'Y' ); ?> astrodj.ru
 				</span>
+				<small>Использование любых материалов сайта запрещено</small>
 			</div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

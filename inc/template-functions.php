@@ -38,6 +38,10 @@ function astrodj_body_classes( $classes ) {
 		$classes[] = 'archive-photography';
 	}
 
+	if ( is_page_template( 'template-shop.php' ) ) {
+		$classes[] = 'astrodj-template-shop';
+	}
+
 	// Adds a class for content placeholder loading.
 	// if ( is_home() || is_archive() || is_search() ) {
 	// 	$classes[] = 'placeholder__preloading';
@@ -138,6 +142,26 @@ function astrodj_seo_meta_tags() {
 		<meta name="description" content="<?php echo $description; ?>" />
 	<?php
 	endif;
+
+	if ( is_category() ) :
+
+		if ( $cat_desc = category_description() ) {
+				?>
+						<meta name="description" content="<?php echo wp_strip_all_tags( $cat_desc ); ?>" />
+				<?php
+		}
+
+	endif;
+
+	if ( is_tag() ) :
+
+		if ( $cat_desc = tag_description() ) {
+				?>
+						<meta name="description" content="<?php echo wp_strip_all_tags( $cat_desc ); ?>" />
+				<?php
+		}
+
+	endif;
 }
 add_action( 'wp_head', 'astrodj_seo_meta_tags', 1 );
 
@@ -156,6 +180,29 @@ function astrodj_document_title( $title ) {
 		if ( $seo_title ) {
 			$title = $seo_title . ' &#8212; ' . get_bloginfo( 'name' );
 		}
+
+		if ( is_front_page() ) {
+			$title = $seo_title;
+		}
+
+		// meta checkbox for prefix 'Купить пейзаж ' by default
+		// if ( is_singular( ['portfolio', 'stock'] ) ) {
+		// 	$without_prfix = get_post_meta( get_the_ID(), $prefix . 'seo_metabox_prefix', true );
+
+		// 	if ( ! $without_prfix ) {
+		// 		$title = 'Пейзаж ' . get_the_title() . ' купить' . ' &#8212; ' . get_bloginfo( 'name' );
+
+		// 		if ( $seo_title ) {
+		// 			$title = 'Пейзаж ' . $seo_title . ' купить' . ' &#8212; ' . get_bloginfo( 'name' );
+		// 		}
+		// 	}
+		// }
+	}
+
+	if ( is_home() ) {
+		$seo_title = get_post_meta( get_option( 'page_for_posts' ), $prefix . 'seo_metabox_title', true );
+
+		$title = $seo_title ? $seo_title . ' &#8212; ' . get_bloginfo( 'name' ) : get_bloginfo( 'name' );
 	}
 
 	if ( is_post_type_archive() ) {

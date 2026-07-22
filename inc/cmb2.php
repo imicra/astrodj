@@ -214,6 +214,13 @@ function astrodj_seo_metabox() {
         'closed'        => true, // Keep the metabox closed by default
     ) );
 
+    // $container->add_field( array(
+    //     'name' => 'Префикс к Title: "Пейзаж ... купить"',
+    //     'desc' => 'Откл. префикс (если галочка снята - префикс по умолчанию есть)',
+    //     'id'   => $prefix .  'seo_metabox_prefix',
+    //     'type' => 'checkbox',
+    // ) );
+
     $container->add_field( array(
         'name' => 'Title',
         'description' => 'Title в head',

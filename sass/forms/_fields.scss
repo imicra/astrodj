@@ -67,3 +67,54 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none; 
 }
+
+// checkboxes
+input[type="checkbox"] {
+	display: none;
+
+	& + span {
+		position: relative;
+		padding-left: 1rem;
+		cursor: pointer;
+
+		&:before {
+			content: '';
+			background-color: transparent;
+			border: 2px solid $color__interactive;
+			padding: 7px;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: 0px;
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: 0px;
+		}
+	}
+
+	&:checked {
+
+		& + span {
+
+			&:before {
+				background-color: transparent;
+				border-color: $color__interactive;
+			}
+
+			&:after {
+				content: '\2713';
+				font-size: .8rem;
+				font-weight: $font__bold;
+				position: absolute;
+				left: 4px;
+				color: $color__interactive;
+				background-color: transparent;
+			}
+		}
+	}
+}

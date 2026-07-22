@@ -10,7 +10,8 @@ function astrodj_filter_cpt( $array ) {
 		'cpt/posts-stock',
 		'cpt/posts-cats',
 		'cpt/posts-archive',
-		'cpt/contact-form'
+		'cpt/contact-form',
+		'cpt/posts-shop',
 	) );
 }
 add_filter( 'astrodj_filter_cpt', 'astrodj_filter_cpt' );
@@ -59,10 +60,15 @@ add_filter( 'pre_get_posts', 'modify_cpt_query' );
  * Redirect CPT single to a custom URL, archive page is publicly available.
  */
 function astrodj_redirect_post() {
-  if ( is_singular( 'archive' ) ) :
-    wp_redirect( home_url(), 301 );
+  if ( is_singular( 'archive' ) ) {
+		wp_redirect( get_post_type_archive_link( 'archive' ), 301 );
     exit;
-  endif;
+	}
+
+	// if ( is_singular( 'cats' ) ) {
+	// 	wp_redirect( get_post_type_archive_link( 'cats' ), 301 );
+  //   exit;
+	// }
 }
 add_action( 'template_redirect', 'astrodj_redirect_post' );
 

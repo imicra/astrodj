@@ -314,6 +314,63 @@ function astrodj_customize_register( $wp_customize ) {
 		'priority'      => 20,
 		'type'          => 'text',
 	));
+
+	/**
+	 * Shop tpl Header Image
+	 */
+	$wp_customize->add_section( 'shop_tpl_header', array(
+		'title'           => __( 'Astrodj Изображение заголовка', 'astrodj' ),
+		'description'     => 'Изображение заголовка на странице Shop',
+		'priority'        => 10,
+		'active_callback' => 'astrodj_return_is_tpl_shop',
+	) );
+
+	$wp_customize->add_setting( 'shop_tpl_header_img', array(
+		'sanitize_callback' => 'esc_url',
+		'transport'         => 'refresh',
+	));
+
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'shop_tpl_header_img', array(
+		'label'    => esc_html__( 'Изображение заголовка', 'astrodj' ),
+		'section'  => 'shop_tpl_header',
+		'priority' => 1,
+	)));
+
+	/**
+	 * Shop tpl Settings
+	 */
+	$wp_customize->add_section( 'shop_tpl_setting', array(
+		'title'           => __( 'Astrodj Shop', 'astrodj' ),
+		'description'     => '',
+		'priority'        => 10,
+		'active_callback' => 'astrodj_return_is_tpl_shop',
+	) );
+
+	$wp_customize->add_setting( 'shop_tpl_title', array(
+		'default'           => esc_html__( 'ФотоМагазин', 'astrodj' ),
+		'sanitize_callback' => 'astrodj_sanitize_input',
+		'transport'	        => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'shop_tpl_title', array(
+		'label'         => esc_html__( 'Заголовок', 'astrodj' ),
+		'section'       => 'shop_tpl_setting',
+		'priority'      => 10,
+		'type'          => 'text',
+	));
+
+	$wp_customize->add_setting( 'shop_tpl_subtitle', array(
+		'default'           => esc_html__( 'Здесь можно купить фотографии и фотокалендари', 'astrodj' ),
+		'sanitize_callback' => 'astrodj_sanitize_input',
+		'transport'	        => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'shop_tpl_subtitle', array(
+		'label'         => esc_html__( 'Подзаголовок', 'astrodj' ),
+		'section'       => 'shop_tpl_setting',
+		'priority'      => 20,
+		'type'          => 'text',
+	));
 }
 add_action( 'customize_register', 'astrodj_customize_register' );
 
@@ -390,6 +447,15 @@ function astrodj_return_is_page_cats() {
  */
 function astrodj_return_is_page_archive() {
   return is_post_type_archive( 'archive' );
+}
+
+/**
+ * Render section for Shop page template.
+ *
+ * @return void
+ */
+function astrodj_return_is_tpl_shop() {
+  return is_page_template( 'template-shop.php' );
 }
 
 /**

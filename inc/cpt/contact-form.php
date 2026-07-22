@@ -53,7 +53,7 @@ function astrodj_manage_contact_columns( $columns ) {
 
 	$newColumns['cb'] = '<input type="checkbox" />';
 	$newColumns['title'] = 'Имя';
-	$newColumns['message'] = 'Письмо';
+	$newColumns['city'] = 'Город';
 	$newColumns['email'] = 'Email';
 	$newColumns['date'] = 'Дата';
 
@@ -68,8 +68,9 @@ function astrodj_manage_contact_custom_column( $column, $post_id ) {
 	global $post;
 	
 	switch( $column ) {
-		case 'message' :
-			echo wp_trim_words( $post->post_content, 20 );
+		case 'city' :
+			// echo wp_trim_words( $post->post_content, 20 );
+			echo get_post_meta( $post_id, '_contact_city_value_key', true );
 			break;
 
 		case 'email' :
@@ -98,6 +99,8 @@ add_filter( 'pre_trash_post', 'astrodj_disable_trash_for_contact', 10, 2 );
  */
 function astrodj_contact_add_meta_box() {
 	add_meta_box( 'contact_email', 'Email', 'astrodj_contact_email_mb_cb', 'contact', 'side' );
+	add_meta_box( 'contact_city', 'Город', 'astrodj_contact_city_mb_cb', 'contact', 'side' );
+	add_meta_box( 'contact_price', 'Город', 'astrodj_contact_price_mb_cb', 'contact', 'side' );
 }
 add_action( 'add_meta_boxes', 'astrodj_contact_add_meta_box' );
 
@@ -110,12 +113,38 @@ function astrodj_contact_email_mb_cb( $post ) {
 	echo '<input type="email" id="astrodj_contact_email_field" name="astrodj_contact_email_field" value="' . esc_attr( $value ) . '" size="25" />';
 }
 
+function astrodj_contact_city_mb_cb( $post ) {
+	wp_nonce_field( 'astrodj_save_contact_city_data', 'astrodj_contact_city_meta_box_nonce' );
+
+	$value = get_post_meta( $post->ID, '_contact_city_value_key', true );
+
+	echo '<label for="astrodj_contact_city_field">Город: </label>';
+	echo '<input type="text" id="astrodj_contact_city_field" name="astrodj_contact_city_field" value="' . esc_attr( $value ) . '" size="25" />';
+}
+
+function astrodj_contact_price_mb_cb( $post ) {
+	wp_nonce_field( 'astrodj_save_contact_price_data', 'astrodj_contact_price_meta_box_nonce' );
+
+	$value = get_post_meta( $post->ID, '_contact_price_value_key', true );
+
+	echo '<label for="astrodj_contact_price_field">Цена: </label>';
+	echo '<input type="text" id="astrodj_contact_price_field" name="astrodj_contact_price_field" value="' . esc_attr( $value ) . '" size="25" />';
+}
+
 function astrodj_save_contact_email_data( $post_id ) {
 	if ( ! isset( $_POST['astrodj_contact_email_meta_box_nonce'] ) ) {
 		return;
 	}
 
 	if ( ! wp_verify_nonce( $_POST['astrodj_contact_email_meta_box_nonce'], 'astrodj_save_contact_email_data' ) ) {
+		return;
+	}
+
+	if ( ! wp_verify_nonce( $_POST['astrodj_contact_city_meta_box_nonce'], 'astrodj_save_contact_city_data' ) ) {
+		return;
+	}
+
+	if ( ! wp_verify_nonce( $_POST['astrodj_contact_price_meta_box_nonce'], 'astrodj_save_contact_price_data' ) ) {
 		return;
 	}
 
@@ -129,6 +158,18 @@ function astrodj_save_contact_email_data( $post_id ) {
 
 	if ( ! isset( $_POST['astrodj_contact_email_field'] ) ) {
 		return;
+	}
+
+	if ( isset( $_POST['astrodj_contact_city_field'] ) ) {
+		$city = sanitize_text_field( $_POST['astrodj_contact_city_field'] );
+
+		update_post_meta( $post_id, '_contact_city_value_key', $city );
+	}
+
+	if ( isset( $_POST['astrodj_contact_price_field'] ) ) {
+		$price = sanitize_text_field( $_POST['astrodj_contact_price_field'] );
+
+		update_post_meta( $post_id, '_contact_price_value_key', $price );
 	}
 
 	$my_data = sanitize_text_field( $_POST['astrodj_contact_email_field'] );

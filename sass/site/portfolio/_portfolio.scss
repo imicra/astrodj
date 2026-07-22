@@ -44,6 +44,7 @@
   
   .astrodj-portfolio {
 		margin: .1em;
+		position: relative;
 
 		@media screen and (min-width: $bp__sm) {
 			// margin: 0;
@@ -73,6 +74,16 @@
 			}
 		}
 
+		.dropdown-wrapper {
+			color: #eee;
+			position: absolute;
+			right: .5em;
+			top: .5em;
+			backdrop-filter: blur(1px);
+			padding: .2em .5em;
+			z-index: 1;
+		}
+
 		figure {
 			position: relative;
 
@@ -89,9 +100,13 @@
 				padding: 4em .5em .5em;
 				margin: 0;
 				text-shadow: 0 0 2px #000;
-				opacity: 0;
+				opacity: 1;
 				pointer-events: none;
 				@include transition;
+
+				@media screen and (min-width: $bp__md) {
+					opacity: 0;
+				}
 			}
 	
 			&:hover .entry-title {

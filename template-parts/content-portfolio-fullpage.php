@@ -47,7 +47,7 @@ endif;
 			<?php astrodj_post_thumbnail_lqip( 'post-thumbnail', 'full', 'medium' ); ?>
 			<div class="post-thumbnail__menu">
 				<span class="rights">&copy; · <?php echo esc_attr( get_option( 'astrodj_rights' ) ); ?></span>
-				<?php astrodj_dropdown_menu() ?>
+				<?php astodj_cart_button() ?>
 			</div><!-- .post-thumbnail__menu -->
 		</div><!-- .post-thumbnail__inner -->
 	</div><!-- .post-thumbnail__wrapper -->
@@ -60,6 +60,7 @@ endif;
 						<?php	
 						the_title( '<h1 class="entry-title">', '</h1>' );
 						?>
+						<span class="entry-subtitle">[Эту работу можно приобрести в рамке А5 за <?php echo get_option( 'astrodj_price' ); ?> &#8381;]</span>
 					</header><!-- .entry-header -->
 					<?php
 					the_content( sprintf(
