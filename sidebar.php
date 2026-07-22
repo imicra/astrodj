@@ -13,8 +13,10 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 ?>
 
 <aside id="secondary" class="widget-area">
-	<?php get_template_part( 'template-parts/account', 'login' ); ?>
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	<div class="sidebar-wrapper">
+		<?php get_template_part( 'template-parts/account', 'login' ); ?>
+		<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	</div>
 	<section class="widget_astrodj_social">
 		<?php get_template_part( 'template-parts/navigation/social', 'menu' ); ?>
 	</section>

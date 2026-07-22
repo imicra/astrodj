@@ -25,7 +25,6 @@
 	color: #fff;
 	font-family: $font__sans;
 	background-color: #2d2d2d;
-	padding: 2em 0;
 	height: 100%;
 	width: 80%;
 	position: fixed;
@@ -34,7 +33,6 @@
 	transform: translateX(-100%);
 	// @include transition;
 	transition: transform 0.3s cubic-bezier(0.42, 0, 0.05, 0.99);
-	overflow-y: scroll;
 	z-index: 100;
 
 	@media screen and (min-width: $bp__sm) {
@@ -47,6 +45,13 @@
 
 	@media screen and (min-width: $bp__lg) {
 		width: 30%;
+	}
+
+	.sidebar-wrapper {
+		padding: 2em 0 0;
+		width: 100%;
+		height: calc(100% - 50px);
+		overflow-y: auto;
 	}
 
 	body.opened-sidebar & {
@@ -346,17 +351,31 @@
 
 /* Social Navigation Menu */
 .widget_astrodj_social {
+	background-color: #2d2d2d;
 	border-top: 1px solid rgba(255,255,255,.1);
-	padding-top: 1em;
-
+	position: fixed;
+	height: 50px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
 	nav {
 		padding: 0 1em;
+		width: 100%;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
 	}
 
 	a {
 		color: #fff;
 		padding: .3em;
-		margin: 0 1em;
 	}
 
 	.icon-vk {
