@@ -84,6 +84,62 @@ function astrodj_portfolio_infinite_cb() {
 }
 
 /**
+ * Ajax action mobile.
+ */
+function astrodj_portfolio_infinite_mobile_cb() {
+  $post_ID = ! empty( $_POST['post_id'] ) ? $_POST['post_id'] : '';
+  $post_type = ! empty( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+
+  // calculate offset
+  $position_query = array(
+    'post_type'              => $post_type,
+    'orderby'                => 'date',
+    'order'                  => 'DESC',
+    'posts_per_archive_page' => -1
+  );
+
+  $position_posts = get_posts( $position_query );
+  $count = 0;
+
+  foreach ( $position_posts as $position_post ) {
+    $count++;
+    if ( $position_post->ID == $post_ID ) {
+      $position = $count;
+      break;
+    }
+  }
+
+  // WP_Query
+  $args = array(
+    'post_type'      => $post_type,
+    'post_status'    => 'publish',
+    'posts_per_page' => 1,
+    'offset'         => $position
+  );
+
+  $query = new WP_Query( $args );
+
+  $GLOBALS['wp_query'] = $query;
+
+  // add_filter( 'editor_max_image_size', 'astrodj_blog_thumbnail' );
+
+  while ( $query->have_posts() ) :
+    $query->the_post();
+
+    get_template_part( 'template-parts/portfolio', 'fullpage' );
+
+  endwhile;
+
+  // remove_filter( 'editor_max_image_size', 'astrodj_blog_thumbnail' );
+
+  wp_reset_postdata();
+
+  wp_die();
+}
+add_action( 'wp_ajax_astrodj_portfolio_infinite_mobile', 'astrodj_portfolio_infinite_mobile_cb' );
+add_action( 'wp_ajax_nopriv_astrodj_portfolio_infinite_mobile', 'astrodj_portfolio_infinite_mobile_cb' );
+
+/**
  * Enqueue JavaScript
  */
 add_action( 'wp_enqueue_scripts', 'astrodj_portfolio_infinite_script' );

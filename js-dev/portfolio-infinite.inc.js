@@ -33,89 +33,140 @@
     /* ---------------------------------------------------------------------------
     * Load More on mobile screen
     * --------------------------------------------------------------------------- */
-    function get_previous_post(trigger) {
-      var previous_post_ID = trigger.attr('data-previous-id'),
-          loader = trigger.find('svg'),
-          json_url = rest_url + previous_post_ID + '?_embed=true' + api_args;
+    // function get_previous_post(trigger) {
+    //   var previous_post_ID = trigger.attr('data-previous-id'),
+    //       loader = trigger.find('svg'),
+    //       json_url = rest_url + previous_post_ID + '?_embed=true' + api_args;
       
-      loader.show();
+    //   loader.show();
+
+    //   $.ajax({
+    //     dataType: 'json',
+    //     url: json_url
+    //   })
+
+    //   .done(function(object) {
+    //     // console.log(object);
+    //     loader.hide();
+    //     the_previous_post(object);
+
+    //     astrodj_lqip();
+    //   })
+      
+    //   .fail(function() {
+    //     if (debug) {
+    //       console.log('error');
+    //     }
+    //     loader.hide();
+    //     trigger.prepend('<article class="astrodj-post-navigation__end"><p>Снимков больше нет...</p></article>');
+    //   });
+
+    //   function the_previous_post(object) {
+    //     var featured_image_ID = object.featured_media;
+    //     var feat_image;
+
+    //     function get_featured_image() {
+    //       if ( featured_image_ID === 0 ) {
+    //           feat_image = '';
+    //       } else {
+    //           var featured_object = object._embedded['wp:featuredmedia'][0];
+    //           var img_width = featured_object.media_details.sizes.full.width;
+    //           var img_height = featured_object.media_details.sizes.full.height;
+    //           feat_image = '<a href="' + object.link + '" data-hash-id="' + object.id + '">' +
+    //                       '<div class="dropdown-wrapper" data-id="' + object.id + '" data-fancybox data-src="#single_shop_form" href="javascript:;">' +
+    //                       '<span>Купить</span>' +
+    //                       '<button class="cart-button">' +
+    //                       '<svg class="icon icon-cart" aria-hidden="true" role="img"><use href="#icon-cart" xlink:href="#icon-cart"></use></svg>' +
+    //                       '</button></div>' +
+    //                       '<button class="photo-like" data-photo="' + object.id + '">' +
+    //                       '<span class="heart">❤</span>' +
+    //                       '<span class="count"></span>' +
+    //                       '</button>' +
+    //                       '<figure class="astrodj-lqip" data-alt="' + featured_object.alt_text + '" ' +
+    //                       'data-src="' + featured_object.media_details.sizes.full.source_url + '" ' +
+    //                       '>' + 
+    //                       '<div class="aspect-ratio-fill" style="padding-bottom: 66.7%;width: 100%;height: 0;"></div>' +
+    //                       '<div class="astrodj-lqip__wrap">' +
+    //                       '<img width="' + img_width + '" height="' + img_height + '" alt="" class="placeholder" ' + 
+    //                       'src="' + featured_object.media_details.sizes.astrodj_lqip.source_url + '">' + 
+    //                       '</div>' +
+    //                       '<div class="astrodj-lqip__wrap">' +
+    //                       '<img width="' + img_width + '" height="' + img_height + '" class="lazy">' + 
+    //                       '</div>' +
+    //                       '<figcaption>' +
+    //                       '<h2 class="entry-title">' + object.title.rendered + 
+    //                       '<br><span>[Заказать фотографию]</span>' + '</h2>'+
+    //                       '</figcaption>' +
+    //                       '</figure>' +
+    //                       '</a>';
+    //       }
+    //       return feat_image;
+    //     }
+
+    //     function build_post() {
+    //       var thumbnail_class = object.cmb2.astrodj_portfolio_meta_metabox.astrodj_radio_orientation;
+
+    //       var previous_post_content = 
+    //           '<article id="post-' + object.id + '" class="astrodj-portfolio ' + thumbnail_class + '">' +
+    //           get_featured_image() +
+    //           '</article>';
+
+    //       trigger.prev('.portfolio-content').append(previous_post_content);
+
+    //       trigger.attr('data-previous-id', object.previous_post_ID);
+
+    //       infinite_post_trigger();
+    //     }
+
+    //     build_post();
+    //   }
+    // }
+
+    function get_previous_post(trigger) {
+      var post_ID = trigger.attr('data-this-id'),
+          post_type = trigger.data('cpt'),
+          loader = trigger.find('svg');
+
+          if (debug) {
+            console.log(post_ID);
+          }
 
       $.ajax({
-        dataType: 'json',
-        url: json_url
-      })
+        url: ajax_url,
+        type: 'post',
+        data: {
+          post_id: post_ID,
+          post_type: post_type,
+          action: 'astrodj_portfolio_infinite_mobile'
+        },
+        beforeSend: function() {
+          loader.show();
+        },
+        success: function(response) {
+          loader.hide();
 
-      .done(function(object) {
-        // console.log(object);
-        loader.hide();
-        the_previous_post(object);
-
-        astrodj_lqip();
-      })
-      
-      .fail(function() {
-        if (debug) {
-          console.log('error');
-        }
-        loader.hide();
-        trigger.prepend('<article class="astrodj-post-navigation__end"><p>Снимков больше нет...</p></article>');
-      });
-
-      function the_previous_post(object) {
-        var featured_image_ID = object.featured_media;
-        var feat_image;
-
-        function get_featured_image() {
-          if ( featured_image_ID === 0 ) {
-              feat_image = '';
+          if (response == 0) {
+            trigger.prepend('<article class="astrodj-post-navigation__end"><p>Снимков больше нет...</p></article>');
           } else {
-              var featured_object = object._embedded['wp:featuredmedia'][0];
-              var img_width = featured_object.media_details.sizes.full.width;
-              var img_height = featured_object.media_details.sizes.full.height;
-              feat_image = '<a href="' + object.link + '" data-hash-id="' + object.id + '">' +
-                          '<div class="dropdown-wrapper" data-id="' + object.id + '" data-fancybox data-src="#single_shop_form" href="javascript:;">' +
-                          '<span>Купить</span>' +
-                          '<button class="cart-button">' +
-                          '<svg class="icon icon-cart" aria-hidden="true" role="img"><use href="#icon-cart" xlink:href="#icon-cart"></use></svg>' +
-                          '</button></div>' +
-                          '<figure class="astrodj-lqip" data-alt="' + featured_object.alt_text + '" ' +
-                          'data-src="' + featured_object.media_details.sizes.full.source_url + '" ' +
-                          '>' + 
-                          '<div class="aspect-ratio-fill" style="padding-bottom: 66.7%;width: 100%;height: 0;"></div>' +
-                          '<div class="astrodj-lqip__wrap">' +
-                          '<img width="' + img_width + '" height="' + img_height + '" alt="" class="placeholder" ' + 
-                          'src="' + featured_object.media_details.sizes.astrodj_lqip.source_url + '">' + 
-                          '</div>' +
-                          '<div class="astrodj-lqip__wrap">' +
-                          '<img width="' + img_width + '" height="' + img_height + '" class="lazy">' + 
-                          '</div>' +
-                          '<figcaption>' +
-                          '<h2 class="entry-title">' + object.title.rendered + 
-                          '<br><span>[Заказать фотографию]</span>' + '</h2>'+
-                          '</figcaption>' +
-                          '</figure>' +
-                          '</a>';
+            trigger.prev('.portfolio-content').append(response);
+
+            astrodj_lqip();
+
+            set_trigger_id();
+
+            infinite_post_trigger();
           }
-          return feat_image;
+
+          if (debug) {
+            console.log('Ajax Portfolio Infinite Mobile');
+          }
+        },
+        error: function(jqxhr, status, errorMsg) {
+          if (debug) {
+            console.log('error Portfolio Infinite Mobile: ' + errorMsg);
+          }
         }
-
-        function build_post() {
-          var thumbnail_class = object.cmb2.astrodj_portfolio_meta_metabox.astrodj_radio_orientation;
-
-          var previous_post_content = 
-              '<article id="post-' + object.id + '" class="astrodj-portfolio ' + thumbnail_class + '">' +
-              get_featured_image() +
-              '</article>';
-
-          trigger.prev('.portfolio-content').append(previous_post_content);
-
-          trigger.attr('data-previous-id', object.previous_post_ID);
-
-          infinite_post_trigger();
-        }
-
-        build_post();
-      }
+      });
     }
 
     /* ---------------------------------------------------------------------------
