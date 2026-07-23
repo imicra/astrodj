@@ -15,6 +15,10 @@
     flex-grow: 1;
     padding: 0;
   }
+
+  .post-thumbnail__inner {
+    position: relative;
+  }
 }
 
 .back-link {
@@ -67,12 +71,15 @@
 
     padding-top: 2em;
     padding-bottom: 2em;
-    position: relative;
     z-index: 10;
 
     @media screen and (max-width: $bp__sm) {
       padding-left: 0;
       padding-right: 0;
+    }
+
+    .photo-like {
+      right:0;
     }
   }
 

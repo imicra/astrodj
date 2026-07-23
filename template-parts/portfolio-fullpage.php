@@ -32,6 +32,11 @@ $classes = array(
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?> data-id="<?php the_ID(); ?>">
 	<?php astodj_cart_button() ?>
+	<?php
+	if ( class_exists(\PhotoLikes\Button::class) ) {
+		echo \PhotoLikes\Button::render(get_the_ID());
+	}
+	?>
 	<a href="<?php echo esc_url( get_permalink() ); ?>" data-hash-id="<?php the_ID(); ?>">
 		<?php astrodj_post_thumbnail_lqip( '', 'full' ); ?>
 	</a>

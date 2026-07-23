@@ -43,6 +43,11 @@ endif;
 			$style = '';
 		}
 		?>
+		<?php
+		if ( class_exists(\PhotoLikes\Button::class) ) {
+			echo \PhotoLikes\Button::render(get_the_ID());
+		}
+		?>
 		<div class="post-thumbnail__inner"<?php echo $style; ?>>
 			<?php astrodj_post_thumbnail_lqip( 'post-thumbnail', 'full', 'medium' ); ?>
 			<div class="post-thumbnail__menu">

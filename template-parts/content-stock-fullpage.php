@@ -39,7 +39,14 @@ endif;
 							]
 						);
 						?>
-						<?php astrodj_post_thumbnail_lqip( 'post-thumbnail', 'full', 'medium' ); ?>
+						<?php
+						if ( class_exists(\PhotoLikes\Button::class) ) {
+							echo \PhotoLikes\Button::render(get_the_ID());
+						}
+						?>
+						<div class="post-thumbnail__inner">
+							<?php astrodj_post_thumbnail_lqip( 'post-thumbnail', 'full', 'medium' ); ?>
+						</div>
 						<div class="post-thumbnail__menu">
 							<span class="rights">&copy; · <?php echo esc_attr( get_option( 'astrodj_rights' ) ); ?></span>
 							<?php astodj_cart_button() ?>
