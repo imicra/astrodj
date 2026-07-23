@@ -398,7 +398,7 @@
 	transform: translateX(260px);
 	opacity: 1;
 	@include transition;
-	z-index: 101;
+	z-index: 1001;
 
 	&.opened {
 		transform: translateX(0);

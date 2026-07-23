@@ -150,6 +150,9 @@
           } else {
             trigger.prev('.portfolio-content').append(response);
 
+            // load like
+            window.photoLikes.loadState();
+
             astrodj_lqip();
 
             set_trigger_id();
@@ -199,6 +202,9 @@
             trigger.prepend('<article class="astrodj-post-navigation__end"><p>Снимков больше нет...</p></article>');
           } else {
             trigger.prev('.portfolio-content').append(response);
+
+            // load like
+            window.photoLikes.loadState();
 
             astrodj_lqip();
 

@@ -106,6 +106,9 @@
             $('.fancybox').fancybox();
             exif_init();
 
+            // load like
+            window.photoLikes.loadState();
+
             if (debug) {
               console.log('Ajax Load More Button');
             }
@@ -242,6 +245,9 @@
           astrodj_lqip();
           $('.fancybox').fancybox();
           exif_init();
+
+          // load like
+          window.photoLikes.loadState();
 
           if (debug) {
             console.log('Ajax pagination');
@@ -725,6 +731,9 @@
           $('#main').html(response);
           astrodj_lqip();
 
+          // load like
+          window.photoLikes.loadState();
+
           if (debug) {
             console.log('Ajax Widget Filter');
           }
@@ -780,6 +789,9 @@
           $('body').removeClass('placeholder__preloading');
           $('#main').html(response);
           astrodj_lqip();
+
+          // load like
+          window.photoLikes.loadState();
 
           if (debug) {
             console.log('Ajax pagination');
